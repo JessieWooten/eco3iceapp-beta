@@ -1,0 +1,16 @@
+body {
+  background-image: '../static/images/franke_eco.jpg';
+  background-repeat: no-repeat;
+}
+
+/*Framework7 class restyling*/
+.page-content {
+  background: -webkit-linear-gradient(bottom left, #25728c, #8ddaf5);
+  background: -o-linear-gradient(bottom left, #25728c, #8ddaf5);
+  background: linear-gradient(to top right, #25728c, #8ddaf5);
+}
+
+.inset {
+  margin-top:15px !important;
+  margin-bottom: 15px !important;
+}

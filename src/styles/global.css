@@ -1,0 +1,56 @@
+/*Content box settings*/
+.e3i-content-sm {
+  height: 100px;
+}
+
+.e3i-content-lg {
+  height: 200px;
+}
+
+/*Title and Text Styling*/
+.unit-name {
+  color: white !important;
+  text-align: center;
+  font-weight: 400;
+  font-size: 25px;
+  margin-bottom: 0;
+}
+
+.page-title {
+  font-weight: 300;
+  color: #fff !important;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: 10;
+  margin-bottom: 0;
+}
+
+.box-title {
+  color: #b6b2b2;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  top: 140px;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+
+
+/*Basic Status Colors*/
+/*App Green*/
+.e3i-success {
+  color: #4ee038;
+}
+/*App Orange*/
+.e3i-warn {
+  color: #ffad17;
+}
+/*App Red*/
+.e3i-fail {
+color: #dc281e;
+}
+/*App Grey*/
+.e3i-grey{
+  
+}
