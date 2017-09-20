@@ -6,16 +6,35 @@
 }
 
 .status-wrapper{
-  margin-bottom: 5px;
+padding-top: 22px;
 }
 
 .status-title-wrapper{
   height: 30%;
 }
 
-.status-icon {
+.status-icon-inline {
   height: 40px;
   display: inline-block;
+}
+
+.status-icon {
+  height: 40px;
+  display: block;
+  margin: auto;
+  padding-top: 12px;
+}
+
+.status-text {
+  text-align: center;
+  font-size: 25px;
+  margin: 0;
+}
+
+.status-text-blank {
+  display: inline-block;
+  font-size: 70px;
+  margin: 0;
 }
 
 .status-text-ok {
@@ -34,7 +53,6 @@
 }
 
 .health-wrapper {
-  margin-bottom: 5px;
 }
 
 .health-title-wrapper{
@@ -44,11 +62,14 @@
 .health-icon {
   height: 20px;
   display: inline-block;
+  padding-right: 5px;
 }
 
 .health-text {
   display: inline-block;
   font-size: 25px;
-  padding-right: 20px;
+  /*padding-right: 20px;*/
+  padding-top:20px;
   margin: 0;
+
 }

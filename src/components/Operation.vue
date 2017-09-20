@@ -5,10 +5,34 @@
       <div class="content-block-inner">
         <div class="e3i-content-lg">
           <div class="status-container">
-            <!--Status Good -->
-            <div class="status-wrapper">
-              <img class="status-icon" src="/static/images/status/status-ok.png">
-              <p class="status-text-ok e3i-success">{{ status }}</p>
+            <!--Status Ok -->
+            <div v-if="status === 'ok'" class="status-wrapper">
+              <img class="status-icon-inline" src="/static/images/operation/status-ok.png">
+              <p class="status-text-ok e3i-success">OK</p>
+            </div>
+            <!-- Status Low Flow -->
+            <div v-else-if="status === 'low flow detected'" class="status-wrapper">
+              <img class="status-icon" src="/static/images/operation/status-warn.png">
+              <p class="status-text e3i-warn">Low Flow Detected</p>
+            </div>
+            <!-- Status Excessive Flow -->
+            <div v-else-if="status === 'excessive flow detected'" class="status-wrapper">
+              <div><img class="status-icon" src="/static/images/operation/status-warn.png"></div>
+              <p class="status-text e3i-warn">Excessive Flow Detected</p>
+            </div>
+            <!-- Status No Communication -->
+            <div v-else-if="status === 'low flow detected'" class="status-wrapper">
+              <img class="status-icon" src="/static/images/operation/status-fail.png">
+              <p class="status-text e3i-fail">No Communication Linked</p>
+            </div>
+            <!-- Status Check Cartridge Health -->
+            <div v-else-if="status === 'check cartridge health'" class="status-wrapper">
+              <img class="status-icon" src="/static/images/operation/status-fail.png">
+              <p class="status-text e3i-fail">Check Cartridge Health</p>
+            </div>
+            <!-- Default -->
+            <div v-else class="status-wrapper">
+              <p class="status-text-blank e3i-gray-light">---</p>
             </div>
 
           </div>
@@ -22,9 +46,24 @@
       <div class="content-block-inner">
         <div class="e3i-content-sm">
           <div class="health-container">
-            <div class="health-wrapper">
-              <img class="health-icon" src="/static/images/cartridge/cartridge-health-good.png">
-              <p class="health-text e3i-success">{{ health }}</p>
+            <!-- Health Good -->
+            <div v-if="health === 'good'" class="health-wrapper">
+              <img class="health-icon" src="/static/images/operation/cartridge-health-good.png">
+              <p class="health-text e3i-success">good</p>
+            </div>
+            <!-- Health Change Soon -->
+            <div v-else-if="health === 'change soon'"class="health-wrapper">
+              <img class="health-icon" src="/static/images/operation/cartridge-health-change-soon.png">
+              <p class="health-text e3i-warn">change soon</p>
+            </div>
+            <!-- Health Change Now -->
+            <div v-else-if="health === 'change now'" class="health-wrapper">
+              <img class="health-icon" src="/static/images/operation/cartridge-health-change-now.png">
+              <p class="health-text e3i-fail">change now</p>
+            </div>
+            <!-- Health Default -->
+            <div v-else class="health-wrapper">
+              <p class="health-text e3i-gray-light">---</p>
             </div>
           </div>
           <div class="status-title-wrapper">
@@ -37,9 +76,14 @@
       <div class="content-block-inner">
         <div class="e3i-content-sm">
           <div class="health-container">
-            <div class="health-wrapper">
-              <img class="health-icon" src="/static/images/status/water-drop.png">
+            <!-- Water Usage Volume # -->
+            <div v-if="waterUsage != ''" class="health-wrapper">
+              <img class="health-icon" src="/static/images/operation/water-drop.png">
               <p class="health-text e3i-blue">{{ waterUsage }} gals</p>
+            </div>
+            <!-- Default Water Usage Volume -->
+            <div v-else class="health-wrapper">
+              <p class="health-text e3i-gray-light">---</p>
             </div>
           </div>
           <div class="status-title-wrapper">

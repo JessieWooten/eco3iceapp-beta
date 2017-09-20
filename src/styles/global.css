@@ -1,11 +1,11 @@
 /*Content box settings*/
 .e3i-content-sm {
-  height: 85px;
+  min-height: 13%;
   background-color: #fff;
 }
 
 .e3i-content-lg {
-  height: 175px;
+  min-height: 26%;
   background-color: #fff;
 }
 
@@ -52,6 +52,7 @@
   display: block;
   font-size: 18px;
   letter-spacing: 0.5px;
+  padding-bottom: 20px;
 }
 
 
@@ -89,7 +90,26 @@
   display: block;
   font-size: 25px;
   padding: 40px 20px;
-  border-bottom: solid 1px #c2c2c2;
+}
+
+/* Loading bar / Eco Unit seaching styling */
+.searching-container {
+  border-top: 1px solid #c8c7cc;
+  border-bottom: 1px solid #c8c7cc;
+}
+
+.searching-container p {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.progress-bar-container {
+  margin: 0 5%;
+  padding: 10px 0 30px;
+}
+
+.selected-unit-icon {
+  height: 10px;
 }
 
 
@@ -119,4 +139,8 @@ color: #dc281e;
 /*App Water Blue*/
 .e3i-blue {
   color: #30bced;
+}
+/* Separator */
+.separator {
+  border-bottom: 1px solid #c8c7cc;
 }

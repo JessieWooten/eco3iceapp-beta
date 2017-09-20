@@ -1,6 +1,5 @@
 <template lang="html">
   <div id="app"
-    @closePanel="closePanel()"
     @panel:closed="togglePanel()"
   >
     <f7-views navbar-through="">
@@ -10,21 +9,23 @@
         <!-- Menu Panel-->
         <panel
           :is-panel-opened="isPanelOpened"
-          @resetPromptOpened="toggleReset()"
+          @resetPromptOpened="toggleResetPrompt()"
           @connectPromptOpened="toggleConnect()"
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
           :is-reset-opened="isResetOpened"
           :unit-name="unitName"
-          @resetClosed="toggleReset()"
+          @resetClosed="toggleResetPrompt()"
+          @resetUnit="resetUnit()"
         ></reset-prompt>
         <!-- Connect Prompt -->
         <connect-prompt
-        :isConnectOpened='isConnectOpened'
-        :unitList="unitList"
-        @connectPromptClosed="toggleConnect()"
-
+          :isConnectOpened='isConnectOpened'
+          :unitList="unitList"
+          :selectedUnitIndex="selectedUnitIndex"
+          @connectPromptClosed="toggleConnect()"
+          @unitSelected="SetSelectedUnit($event)"
         ></connect-prompt>
         <f7-pages id="pages">
           <f7-page class="navbar-fixed">
@@ -70,22 +71,45 @@ export default {
       return this.resetOpened;
     },isConnectOpened :function() {
       return this.connectOpened;
+    },
+    selectedUnit: function() {
+      return this.selectedUnitIndex;
     }
   },
   methods: {
-    closePanel: function() {
-      if(this.panelOpened){
-        this.panelOpened = false;
-      }
-    },
+    // FIX THIS v
+    // closePanel: function() {
+    //   if(this.panelOpened){
+    //     this.panelOpened = false;
+    //   }
+    // },
     togglePanel: function(){
       this.panelOpened = !this.panelOpened;
     },
-    toggleReset: function() {
+    toggleResetPrompt: function() {
       this.resetOpened = !this.resetOpened;
     },
     toggleConnect: function() {
       this.connectOpened = !this.connectOpened;
+    },
+    cleanUpInput: function(input) {
+      return input.toLowerCase().trim();
+    },
+    SetSelectedUnit: function(index) {
+      this.unitName = this.unitList[index].name;
+      this.status = this.cleanUpInput(this.unitList[index].status);
+      this.health = this.cleanUpInput(this.unitList[index].health);
+      this.waterUsage = this.cleanUpInput(this.unitList[index].volume);
+      this.selectedUnitIndex = index;
+    },
+    resetUnit: function(index) {
+      //make reset the unit #s not this.data
+      this.unitName = '';
+      this.status = '';
+      this.health = '';
+      this.waterUsage = '';
+      this.selecte
+      console.log('^reset|');
     }
   },
   data () {
@@ -93,14 +117,45 @@ export default {
       panelOpened: false,
       resetOpened: false,
       connectOpened: false,
-      unitName: 'Eco Unit 2',
-      status: 'OK',
-      health: 'good',
-      waterUsage: '123',
+      unitName: '- - -',
+      status: '',
+      health: '',
+      waterUsage: '',
+      selectedUnitIndex: -1,
       unitList: [
-                {name: 'Eco Unit 1'},
-                {name: 'Eco Unit 2'},
-                {name: 'Eco Unit 3'}]
+                {
+                  name: 'Eco Unit 1',
+                  status: 'OK',
+                  health: 'Good',
+                  volume: '1200',
+                  consumption:'800',
+                  duty:'600',
+                  avg_consumption:'760',
+                  avg_duty:'590',
+                  selected: false
+                },
+                {
+                  name: 'Eco Unit 2',
+                  status: 'Check Cartridge Health',
+                  health: 'Change Now',
+                  volume: '1200',
+                  consumption:'800',
+                  duty:'600',
+                  avg_consumption:'760',
+                  avg_duty:'590',
+                  selected: false
+                },
+                {
+                  name: 'Eco Unit 3',
+                  status: 'Excessive Flow Detected',
+                  health: 'Change Soon',
+                  volume: '3000',
+                  consumption:'635',
+                  duty:'344',
+                  avg_consumption:'1404',
+                  avg_duty:'479',
+                  selected: false
+                }]
     }
   }
 }
