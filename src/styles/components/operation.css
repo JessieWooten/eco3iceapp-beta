@@ -1,1 +1,54 @@
+.status-container {
+  height: 70%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
 
+.status-wrapper{
+  margin-bottom: 5px;
+}
+
+.status-title-wrapper{
+  height: 30%;
+}
+
+.status-icon {
+  height: 40px;
+  display: inline-block;
+}
+
+.status-text-ok {
+  display: inline-block;
+  font-size: 70px;
+  padding-right: 20px;
+  margin: 0;
+}
+
+/*Health Section Styling*/
+.health-container {
+  height: 60%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.health-wrapper {
+  margin-bottom: 5px;
+}
+
+.health-title-wrapper{
+  height: 40%;
+}
+
+.health-icon {
+  height: 20px;
+  display: inline-block;
+}
+
+.health-text {
+  display: inline-block;
+  font-size: 25px;
+  padding-right: 20px;
+  margin: 0;
+}

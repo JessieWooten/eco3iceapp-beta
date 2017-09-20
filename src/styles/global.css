@@ -1,10 +1,12 @@
 /*Content box settings*/
 .e3i-content-sm {
-  height: 100px;
+  height: 85px;
+  background-color: #fff;
 }
 
 .e3i-content-lg {
-  height: 200px;
+  height: 175px;
+  background-color: #fff;
 }
 
 /*Title and Text Styling*/
@@ -16,11 +18,15 @@
   margin-bottom: 0;
 }
 
+.nav-title {
+  text-align: center;
+}
+
 .page-title {
   font-weight: 300;
   color: #fff !important;
   text-align: center;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-top: 10;
   margin-bottom: 0;
 }
@@ -30,10 +36,46 @@
   text-align: center;
   margin: 0 auto;
   display: block;
-  position: relative;
-  top: 140px;
   font-size: 18px;
   letter-spacing: 0.5px;
+}
+
+
+/*Menu Panel Styling*/
+.menu-item {
+  color: #5a5a5a;
+  font-weight: 300;
+}
+
+.menu-icon {
+  color: #5a5a5a;
+  font-size: 12px;
+}
+
+.menu-logo {
+  height: 30px;
+}
+
+.menu-icon-reset {
+  color: #dc281e;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.menu-logo-container {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0;
+}
+
+/*Reset Prompt Styling*/
+.reset-title {
+  color: #5a5a5a;
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  padding: 40px 20px;
+  border-bottom: solid 1px #c2c2c2;
 }
 
 
@@ -50,7 +92,17 @@
 .e3i-fail {
 color: #dc281e;
 }
-/*App Grey*/
-.e3i-grey{
-  
+
+/*Basic Text Colors*/
+/*App Gray*/
+.e3i-gray{
+  color: #5a5a5a;
+}
+/*App light Gray*/
+.e3i-gray-light{
+  color: #b6b2b2;
+}
+/*App Water Blue*/
+.e3i-blue {
+  color: #30bced;
 }

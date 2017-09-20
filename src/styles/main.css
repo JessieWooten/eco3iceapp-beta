@@ -10,7 +10,43 @@ body {
   background: linear-gradient(to top right, #25728c, #8ddaf5);
 }
 
+.content-block-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.list-block {
+  margin: 0;
+}
+
 .inset {
   margin-top:15px !important;
   margin-bottom: 15px !important;
+}
+
+.navbar-inner {
+  background-color: #ffffff;
+}
+
+.panel {
+  background-color: #f2f2f2 !important;
+}
+
+.panel-overlay{
+  background: #000 !important;
+  opacity: .7 !important;
+}
+
+.actions-modal-group {
+  background-color: #fff;
+}
+
+.actions-modal-button {
+  width: 50%;
+  display: inline-block;
+  text-align: center;
+  font-size: 18px;
+  margin-top: 6px;
+  margin-bottom: 2px;
+  border-bottom: 0 !important;
 }
