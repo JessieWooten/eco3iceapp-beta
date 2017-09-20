@@ -5,10 +5,12 @@
       <div class="content-block-inner">
         <div class="e3i-content-lg">
           <div class="status-container">
+            <!--Status Good -->
             <div class="status-wrapper">
               <img class="status-icon" src="/static/images/status/status-ok.png">
               <p class="status-text-ok e3i-success">{{ status }}</p>
             </div>
+
           </div>
           <div class="status-title-wrapper">
             <span class="box-title">operational status</span>
@@ -58,7 +60,7 @@ export default {
   },
   data: function() {
     return {
-      
+
     }
   }
 }

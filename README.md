@@ -1,6 +1,6 @@
 # eco3ice-beta1
 
-> beta 1 metric app for 
+> beta 1 metric app for Franke EcO3Ice 
 
 ## Build Setup
 

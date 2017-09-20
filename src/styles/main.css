@@ -8,6 +8,7 @@ body {
   background: -webkit-linear-gradient(bottom left, #25728c, #8ddaf5);
   background: -o-linear-gradient(bottom left, #25728c, #8ddaf5);
   background: linear-gradient(to top right, #25728c, #8ddaf5);
+  padding-top: 0 !important;
 }
 
 .content-block-inner {
@@ -49,4 +50,8 @@ body {
   margin-top: 6px;
   margin-bottom: 2px;
   border-bottom: 0 !important;
+}
+
+.modal-overlay {
+  display: none !important;
 }

@@ -5,7 +5,11 @@
         <img class="menu-logo" src="/static/images/franke-logo.jpg" alt="Franke">
       </div>
       <f7-list>
-        <f7-list-item title="Connect to machine" class="menu-item">
+        <f7-list-item
+          title="Connect to machine"
+          class="menu-item"
+          @click="openConnectPrompt"
+        >
           <i class="f7-icons menu-icon">social_rss_fill</i>
         </f7-list-item>
         <f7-list-item
@@ -27,8 +31,11 @@ export default {
     isResetOpened: Boolean
   },
   methods: {
+    openConnectPrompt: function() {
+      this.$emit('connectPromptOpened');
+    },
     openResetPrompt: function() {
-      this.$emit('resetPromptOpened')
+      this.$emit('resetPromptOpened');
     }
   }
 }

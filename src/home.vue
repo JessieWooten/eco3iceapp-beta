@@ -1,29 +1,31 @@
 <template lang="html">
   <div id="app"
-    @actions:closed="toggleReset()"
+    @closePanel="closePanel()"
     @panel:closed="togglePanel()"
   >
     <f7-views navbar-through="">
       <f7-view main="" url="/" :dynamic-navbar="true">
-        <f7-navbar>
-          <f7-nav-left>
-            <i class="f7-icons e3i-gray" @click="togglePanel()" style="margin-left: 10px;">bars</i>
-          </f7-nav-left>
-          <f7-nav-center sliding="" class="e3i-blue nav-title">EcO3Ice Metrics</f7-nav-center>
-          <f7-nav-right></f7-nav-right>
-        </f7-navbar>
-        <!--Menu Panel-->
+        <!-- Navigation Bar -->
+        <navigation @togglePanel="togglePanel()"></navigation>
+        <!-- Menu Panel-->
         <panel
           :is-panel-opened="isPanelOpened"
           @resetPromptOpened="toggleReset()"
-          @panel:closed="togglePanel()"
+          @connectPromptOpened="toggleConnect()"
         ></panel>
-        <!--Reset Prompt -->
+        <!-- Reset Prompt -->
         <reset-prompt
-        :is-reset-opened="isResetOpened"
-        :unit-name="unitName"
-        @resetClosed="toggleReset()"
+          :is-reset-opened="isResetOpened"
+          :unit-name="unitName"
+          @resetClosed="toggleReset()"
         ></reset-prompt>
+        <!-- Connect Prompt -->
+        <connect-prompt
+        :isConnectOpened='isConnectOpened'
+        :unitList="unitList"
+        @connectPromptClosed="toggleConnect()"
+
+        ></connect-prompt>
         <f7-pages id="pages">
           <f7-page class="navbar-fixed">
             <h2 class="unit-name">{{ unitName }}</h2>
@@ -46,40 +48,59 @@
 </template>
 
 <script>
+import Navigation from './components/Navigation.vue'
 import Operation from './components/Operation.vue'
 import Panel from './components/Panel.vue'
-import ResetPrompt from './components/Reset.vue'
+import ResetPrompt from './components/menu/Reset.vue'
+import ConnectPrompt from './components/menu/Connect.vue'
 export default {
   name: 'app',
   components: {
+    Navigation,
     Operation,
     Panel,
-    ResetPrompt
+    ResetPrompt,
+    ConnectPrompt
   },
   computed: {
-    isPanelOpened: function(){
+    isPanelOpened: function() {
       return this.panelOpened;
     },
-    isResetOpened: function(){
+    isResetOpened: function() {
       return this.resetOpened;
+    },isConnectOpened :function() {
+      return this.connectOpened;
     }
   },
   methods: {
+    closePanel: function() {
+      if(this.panelOpened){
+        this.panelOpened = false;
+      }
+    },
     togglePanel: function(){
       this.panelOpened = !this.panelOpened;
     },
     toggleReset: function() {
       this.resetOpened = !this.resetOpened;
+    },
+    toggleConnect: function() {
+      this.connectOpened = !this.connectOpened;
     }
   },
   data () {
     return {
       panelOpened: false,
       resetOpened: false,
+      connectOpened: false,
       unitName: 'Eco Unit 2',
       status: 'OK',
       health: 'good',
-      waterUsage: '123'
+      waterUsage: '123',
+      unitList: [
+                {name: 'Eco Unit 1'},
+                {name: 'Eco Unit 2'},
+                {name: 'Eco Unit 3'}]
     }
   }
 }
