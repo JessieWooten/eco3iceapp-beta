@@ -7,6 +7,8 @@ import Framework7Vue from 'Framework7Vue'
 
 Vue.use(Framework7Vue);
 
+export const promptBus = new Vue();
+
 new Vue({
   el: '#app',
   render: h => h(Home),

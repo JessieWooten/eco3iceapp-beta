@@ -1,5 +1,6 @@
 <template lang="html">
   <div>
+    <div :hidden="!isPanelOpened" class="e3i-prompt-overlay" @click="closePanel"></div>
     <f7-panel left cover :opened='isPanelOpened'>
       <div class="menu-logo-container">
         <img class="menu-logo" src="/static/images/franke-logo.jpg" alt="Franke">
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import { promptBus } from '../main'
 export default {
   props: {
     isPanelOpened: Boolean,
@@ -32,10 +34,13 @@ export default {
   },
   methods: {
     openConnectPrompt: function() {
-      this.$emit('connectPromptOpened');
+      this.$emit('openConnectPrompt');
     },
     openResetPrompt: function() {
-      this.$emit('resetPromptOpened');
+      this.$emit('openResetPrompt');
+    },
+    closePanel: function() {
+      this.$emit('closePanel')
     }
   }
 }

@@ -21,7 +21,7 @@
               <p class="status-text e3i-warn">Excessive Flow Detected</p>
             </div>
             <!-- Status No Communication -->
-            <div v-else-if="status === 'low flow detected'" class="status-wrapper">
+            <div v-else-if="status === 'no communication linked'" class="status-wrapper">
               <img class="status-icon" src="/static/images/operation/status-fail.png">
               <p class="status-text e3i-fail">No Communication Linked</p>
             </div>

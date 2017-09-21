@@ -52,6 +52,6 @@ body {
   border-bottom: 0 !important;
 }
 
-.modal-overlay {
+.panel-overlay {
   display: none !important;
 }

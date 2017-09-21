@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,.6);
-  z-index: 13000;
+  z-index: 2000;
   visibility: visible;
   opacity: 1;
   -webkit-transition-duration: .4s;
@@ -24,6 +24,11 @@
 }
 
 /*Title and Text Styling*/
+.unit-name-container {
+  padding: 0 30px;
+  word-wrap: break-word;
+}
+
 .unit-name {
   color: white !important;
   text-align: center;

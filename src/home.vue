@@ -1,7 +1,5 @@
 <template lang="html">
-  <div id="app"
-    @panel:closed="togglePanel()"
-  >
+  <div id="app">
     <f7-views navbar-through="">
       <f7-view main="" url="/" :dynamic-navbar="true">
         <!-- Navigation Bar -->
@@ -9,8 +7,9 @@
         <!-- Menu Panel-->
         <panel
           :is-panel-opened="isPanelOpened"
-          @resetPromptOpened="toggleResetPrompt()"
-          @connectPromptOpened="toggleConnect()"
+          @openResetPrompt="toggleResetPrompt()"
+          @openConnectPrompt="toggleConnect()"
+          @closePanel="togglePanel()"
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
@@ -18,6 +17,7 @@
           :unit-name="unitName"
           @resetClosed="toggleResetPrompt()"
           @resetUnit="resetUnit()"
+          @closeAll="togglePanel()"
         ></reset-prompt>
         <!-- Connect Prompt -->
         <connect-prompt
@@ -25,11 +25,13 @@
           :unitList="unitList"
           :selectedUnitIndex="selectedUnitIndex"
           @connectPromptClosed="toggleConnect()"
-          @unitSelected="SetSelectedUnit($event)"
+          @unitSelected="setSelectedUnit($event),togglePanel()"
         ></connect-prompt>
         <f7-pages id="pages">
           <f7-page class="navbar-fixed">
-            <h2 class="unit-name">{{ unitName }}</h2>
+            <div class="unit-name-container">
+              <h2 class="unit-name">{{ unitName }}</h2>
+            </div>
           <!-- main content start -->
             <f7-swiper>
               <f7-swiper-slide>
@@ -77,12 +79,6 @@ export default {
     }
   },
   methods: {
-    // FIX THIS v
-    // closePanel: function() {
-    //   if(this.panelOpened){
-    //     this.panelOpened = false;
-    //   }
-    // },
     togglePanel: function(){
       this.panelOpened = !this.panelOpened;
     },
@@ -95,7 +91,7 @@ export default {
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
-    SetSelectedUnit: function(index) {
+    setSelectedUnit: function(index) {
       this.unitName = this.unitList[index].name;
       this.status = this.cleanUpInput(this.unitList[index].status);
       this.health = this.cleanUpInput(this.unitList[index].health);
@@ -127,12 +123,11 @@ export default {
                   name: 'Eco Unit 1',
                   status: 'OK',
                   health: 'Good',
-                  volume: '1200',
+                  volume: '970',
                   consumption:'800',
                   duty:'600',
                   avg_consumption:'760',
-                  avg_duty:'590',
-                  selected: false
+                  avg_duty:'590'
                 },
                 {
                   name: 'Eco Unit 2',
@@ -142,8 +137,7 @@ export default {
                   consumption:'800',
                   duty:'600',
                   avg_consumption:'760',
-                  avg_duty:'590',
-                  selected: false
+                  avg_duty:'590'
                 },
                 {
                   name: 'Eco Unit 3',
@@ -153,8 +147,7 @@ export default {
                   consumption:'635',
                   duty:'344',
                   avg_consumption:'1404',
-                  avg_duty:'479',
-                  selected: false
+                  avg_duty:'479'
                 }]
     }
   }

@@ -1,6 +1,5 @@
 <template lang="html">
-  <div>
-    <div :hidden="!isResetOpened" class="e3i-prompt-overlay" @click="closeResetPrompt"></div>
+  <div @actions:closed="closeResetPrompt()">
     <f7-actions id="reset" animated="true" :opened="isResetOpened">
       <f7-actions-group>
         <f7-actions-label class="reset-title separator">Are you sure you want to reset<br/> {{ unitName }}?</f7-actions-label>
@@ -12,6 +11,7 @@
 </template>
 
 <script>
+import { promptBus } from '../../main'
 export default {
   props: {
     isResetOpened: Boolean,
@@ -22,11 +22,11 @@ export default {
   methods: {
     closeResetPrompt: function(){
       this.$emit('resetClosed');
-      this.$emit('panel:closed');
     },
     reset: function() {
       this.$emit('resetUnit');
       this.closeResetPrompt();
+      this.$emit('closeAll');
     },
     data: function() {
       return {

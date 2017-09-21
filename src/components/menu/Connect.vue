@@ -1,6 +1,5 @@
 <template lang="html">
-  <div>
-    <div :hidden="!isConnectOpened" class="e3i-prompt-overlay" @click="closeConnectPrompt"></div>
+  <div @actions:closed="closeConnectPrompt()">
     <f7-actions :opened="isConnectOpened">
       <f7-actions-group>
         <f7-actions-label class="reset-title">Select Unit</f7-actions-label>
@@ -38,14 +37,10 @@ export default {
     closeConnectPrompt: function() {
       this.$emit('connectPromptClosed');
     },
-    closePanel: function() {
-      this.$emit('closePanel');
-    },
     selectUnit: function(unit, index) {
       console.log( unit + ' Selected' );
       this.$emit('unitSelected', index);
       this.closeConnectPrompt();
-      this.closePanel();
     }
   }
 }
