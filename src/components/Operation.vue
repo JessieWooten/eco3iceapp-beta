@@ -48,17 +48,17 @@
           <div class="health-container">
             <!-- Health Good -->
             <div v-if="health === 'good'" class="health-wrapper">
-              <img class="health-icon" src="/static/images/operation/cartridge-health-good.png">
+              <img class="health-icon" src="/static/images/operation/health-good.png">
               <p class="health-text e3i-success">good</p>
             </div>
             <!-- Health Change Soon -->
             <div v-else-if="health === 'change soon'"class="health-wrapper">
-              <img class="health-icon" src="/static/images/operation/cartridge-health-change-soon.png">
+              <img class="health-icon" src="/static/images/operation/health-change-soon.png">
               <p class="health-text e3i-warn">change soon</p>
             </div>
             <!-- Health Change Now -->
             <div v-else-if="health === 'change now'" class="health-wrapper">
-              <img class="health-icon" src="/static/images/operation/cartridge-health-change-now.png">
+              <img class="health-icon" src="/static/images/operation/health-change-now.png">
               <p class="health-text e3i-fail">change now</p>
             </div>
             <!-- Health Default -->
@@ -78,7 +78,7 @@
           <div class="health-container">
             <!-- Water Usage Volume # -->
             <div v-if="waterUsage != ''" class="health-wrapper">
-              <img class="health-icon" src="/static/images/operation/water-drop.png">
+              <img class="water-icon" src="/static/images/operation/water-drop.png">
               <p class="health-text e3i-blue">{{ waterUsage }} gals</p>
             </div>
             <!-- Default Water Usage Volume -->

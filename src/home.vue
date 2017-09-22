@@ -6,14 +6,14 @@
         <navigation @togglePanel="togglePanel()"></navigation>
         <!-- Menu Panel-->
         <panel
-          :is-panel-opened="isPanelOpened"
+          :is-panel-opened="panelOpened"
           @openResetPrompt="toggleResetPrompt()"
-          @openConnectPrompt="toggleConnect()"
+          @openConnectPrompt="toggleConnect(), requestData()"
           @closePanel="togglePanel()"
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
-          :is-reset-opened="isResetOpened"
+          :is-reset-opened="resetOpened"
           :unit-name="unitName"
           @resetClosed="toggleResetPrompt()"
           @resetUnit="resetUnit()"
@@ -21,7 +21,7 @@
         ></reset-prompt>
         <!-- Connect Prompt -->
         <connect-prompt
-          :isConnectOpened='isConnectOpened'
+          :isConnectOpened='connectOpened'
           :unitList="unitList"
           :selectedUnitIndex="selectedUnitIndex"
           @connectPromptClosed="toggleConnect()"
@@ -66,20 +66,20 @@ export default {
     ConnectPrompt
   },
   computed: {
-    isPanelOpened: function() {
-      return this.panelOpened;
-    },
-    isResetOpened: function() {
-      return this.resetOpened;
-    },isConnectOpened :function() {
-      return this.connectOpened;
-    },
-    selectedUnit: function() {
-      return this.selectedUnitIndex;
-    }
   },
   methods: {
-    togglePanel: function(){
+    requestData: function() {
+      var xhttp = new XMLHttpRequest();
+      var list = this.unitList;
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          list.push(JSON.parse(this.responseText));
+         }
+      };
+      xhttp.open("GET", "http://localhost:8081/status", true);
+      xhttp.send();
+    },
+    togglePanel: function() {
       this.panelOpened = !this.panelOpened;
     },
     toggleResetPrompt: function() {
@@ -100,7 +100,7 @@ export default {
     },
     resetUnit: function(index) {
       //make reset the unit #s not this.data
-      this.unitName = '';
+      this.unitName = '- - -';
       this.status = '';
       this.health = '';
       this.waterUsage = '';
@@ -110,6 +110,7 @@ export default {
   },
   data () {
     return {
+      ajaxData: 'ajax?',
       panelOpened: false,
       resetOpened: false,
       connectOpened: false,
@@ -118,38 +119,39 @@ export default {
       health: '',
       waterUsage: '',
       selectedUnitIndex: -1,
-      unitList: [
-                {
-                  name: 'Eco Unit 1',
-                  status: 'OK',
-                  health: 'Good',
-                  volume: '970',
-                  consumption:'800',
-                  duty:'600',
-                  avg_consumption:'760',
-                  avg_duty:'590'
-                },
-                {
-                  name: 'Eco Unit 2',
-                  status: 'Check Cartridge Health',
-                  health: 'Change Now',
-                  volume: '1200',
-                  consumption:'800',
-                  duty:'600',
-                  avg_consumption:'760',
-                  avg_duty:'590'
-                },
-                {
-                  name: 'Eco Unit 3',
-                  status: 'Excessive Flow Detected',
-                  health: 'Change Soon',
-                  volume: '3000',
-                  consumption:'635',
-                  duty:'344',
-                  avg_consumption:'1404',
-                  avg_duty:'479'
-                }]
+      unitList: []
     }
   }
 }
 </script>
+
+<!-- {
+  name: 'Eco Unit 1',
+  status: 'OK',
+  health: 'Good',
+  volume: '970',
+  consumption:'800',
+  duty:'600',
+  avg_consumption:'760',
+  avg_duty:'590'
+},
+{
+  name: 'Eco Unit 2',
+  status: 'Check Cartridge Health',
+  health: 'Change Now',
+  volume: '1200',
+  consumption:'800',
+  duty:'600',
+  avg_consumption:'760',
+  avg_duty:'590'
+},
+{
+  name: 'Eco Unit 3',
+  status: 'Excessive Flow Detected',
+  health: 'Change Soon',
+  volume: '3000',
+  consumption:'635',
+  duty:'344',
+  avg_consumption:'1404',
+  avg_duty:'479'
+} -->

@@ -3,7 +3,7 @@
     <f7-actions :opened="isConnectOpened">
       <f7-actions-group>
         <f7-actions-label class="reset-title">Select Unit</f7-actions-label>
-        <f7-list>
+        <f7-list class="unit-list">
           <div v-if="unitList.length <= 0" class="searching-container">
             <p class="e3i-gray">searching for nearby units</p>
             <div class="progress-bar-container">

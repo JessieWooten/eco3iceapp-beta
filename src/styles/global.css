@@ -97,6 +97,12 @@
   padding: 40px 20px;
 }
 
+/* Connect Promtp Styling*/
+.unit-list {
+  max-height: 200px;
+  overflow: scroll;
+}
+
 /* Loading bar / Eco Unit seaching styling */
 .searching-container {
   border-top: 1px solid #c8c7cc;
