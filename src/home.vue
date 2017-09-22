@@ -8,7 +8,7 @@
         <panel
           :is-panel-opened="panelOpened"
           @openResetPrompt="toggleResetPrompt()"
-          @openConnectPrompt="toggleConnect(), requestData()"
+          @openConnectPrompt="toggleConnect(), requestUnit()"
           @closePanel="togglePanel()"
         ></panel>
         <!-- Reset Prompt -->
@@ -68,7 +68,7 @@ export default {
   computed: {
   },
   methods: {
-    requestData: function() {
+    requestUnit: function() {
       var xhttp = new XMLHttpRequest();
       var list = this.unitList;
       xhttp.onreadystatechange = function() {
