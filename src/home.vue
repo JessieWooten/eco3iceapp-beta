@@ -104,7 +104,7 @@ export default {
       this.status = '';
       this.health = '';
       this.waterUsage = '';
-      this.selecte
+      this.selectedUnitIndex = -1;
       console.log('^reset|');
     }
   },
@@ -125,7 +125,9 @@ export default {
 }
 </script>
 
-<!-- {
+<!-- Hard coded test data
+
+{
   name: 'Eco Unit 1',
   status: 'OK',
   health: 'Good',
