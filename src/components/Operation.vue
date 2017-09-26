@@ -30,9 +30,13 @@
               <img class="status-icon" src="file:///android_asset/static/images/operation/status-fail.png">
               <p class="status-text e3i-fail">Check Cartridge Health</p>
             </div>
+            <!-- status = '---' -->
+            <div v-else-if="status === '---'" class="status-wrapper">
+              <p class="status-text-blank e3i-gray-light">---</p>
+            </div>
             <!-- Default -->
             <div v-else class="status-wrapper">
-              <p class="status-text-blank e3i-gray-light">{{ status }}</p>
+              <p class="status-text e3i-gray-light">{{ status }}</p>
             </div>
 
           </div>
