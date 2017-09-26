@@ -147,7 +147,7 @@ export default {
       connectOpened: false,
       unitName: '- - -',
       status: '---',
-      health: 'change_soon',
+      health: '---',
       waterUsage: '---',
       selectedUnitIndex: -1,
       unitList: []
