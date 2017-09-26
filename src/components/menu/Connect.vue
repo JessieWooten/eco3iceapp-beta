@@ -17,7 +17,7 @@
             class="menu-item"
             @click="selectUnit(unit.name, index)"
           >
-            <img v-if="selectedUnitIndex === index" src="/static/images/selected.png" class="selected-unit-icon" alt="°">
+            <img v-if="selectedUnitIndex === index" src="file:///android_asset/static/images/selected.png" class="selected-unit-icon" alt="°">
           </f7-list-item>
         </f7-list>
         <f7-actions-button @click="closeConnectPrompt" class="e3i-gray-light" style="width: 100% !important;">Cancel</f7-actions-button>

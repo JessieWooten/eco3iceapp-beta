@@ -3,7 +3,7 @@
     <div :hidden="!isPanelOpened" class="e3i-prompt-overlay" @click="closePanel"></div>
     <f7-panel left cover :opened='isPanelOpened'>
       <div class="menu-logo-container">
-        <img class="menu-logo" src="/static/images/franke-logo.jpg" alt="Franke">
+        <img class="menu-logo" src="file:///android_asset/static/images/franke-logo.jpg" alt="Franke">
       </div>
       <f7-list>
         <f7-list-item

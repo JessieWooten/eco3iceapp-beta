@@ -68,16 +68,42 @@ export default {
   computed: {
   },
   methods: {
+	dataUpdate: function(str) {
+		if(str == "connected") {
+			setTimeout(function() { window.app.sendCommand("dr");},500);
+		} else if(str == "data_ready") {
+			try {
+				var sdata = JSON.parse(window.app.getData());
+				this.status = sdata.status;
+				this.health = sdata.health;
+				this.waterUsage = sdata.volume;
+			} catch(e) { console.log(e,"error"); }
+
+		}
+	},
     requestUnit: function() {
-      var xhttp = new XMLHttpRequest();
+        var dcount = 0;
+	this.unitList = [];
       var list = this.unitList;
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          list.push(JSON.parse(this.responseText));
-         }
-      };
-      xhttp.open("GET", "http://localhost:8081/status", true);
-      xhttp.send();
+      window.app.scanBle();
+      window.tmpinterval  = setInterval(function() {
+        var devices = null;
+        try {
+            devices = JSON.parse(window.app.getDevices());
+        } catch(e) { devices = null; }
+        if(devices != null) {
+            for(var i =0;i<devices.length;i++) {
+	        var found = false;
+		for(var j=0;j<list.length;j++) {
+	                if(devices[i].mac == list[j].mac)
+                 	   found = true;
+		}
+        	if(!found)
+	            list.push(devices[i]);
+            }
+        }
+      },100);
+      window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
     },
     togglePanel: function() {
       this.panelOpened = !this.panelOpened;
@@ -87,25 +113,30 @@ export default {
     },
     toggleConnect: function() {
       this.connectOpened = !this.connectOpened;
+	if(!this.connectOpened) {
+		window.clearInterval(window.tmpinterval);
+		window.clearTimeout(window.tmptimeout);
+	}
     },
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
     setSelectedUnit: function(index) {
-      this.unitName = this.unitList[index].name;
-      this.status = this.cleanUpInput(this.unitList[index].status);
-      this.health = this.cleanUpInput(this.unitList[index].health);
-      this.waterUsage = this.cleanUpInput(this.unitList[index].volume);
-      this.selectedUnitIndex = index;
+	window.clearInterval(window.tmpinterval);
+	window.clearTimeout(window.tmptimeout);
+	var device = this.unitList[index];
+	this.unitName = device.name;
+      	this.selectedUnitIndex = index;
+	window.app.connect(device.mac);
     },
     resetUnit: function(index) {
       //make reset the unit #s not this.data
       this.unitName = '- - -';
-      this.status = '';
-      this.health = '';
-      this.waterUsage = '';
+      this.status = '---';
+      this.health = '---';
+      this.waterUsage = '---';
       this.selectedUnitIndex = -1;
-      console.log('^reset|');
+      window.app.sendCommand('reset');
     }
   },
   data () {
@@ -115,9 +146,9 @@ export default {
       resetOpened: false,
       connectOpened: false,
       unitName: '- - -',
-      status: '',
-      health: '',
-      waterUsage: '',
+      status: '---',
+      health: '---',
+      waterUsage: '---',
       selectedUnitIndex: -1,
       unitList: []
     }

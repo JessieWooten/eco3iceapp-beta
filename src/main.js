@@ -9,7 +9,7 @@ Vue.use(Framework7Vue);
 
 export const promptBus = new Vue();
 
-new Vue({
+window.vue = new Vue({
   el: '#app',
   render: h => h(Home),
   // Framework7 Parameters
