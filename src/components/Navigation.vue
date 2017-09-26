@@ -3,7 +3,7 @@
     <f7-navbar>
       <f7-nav-left>
         <div class="panel-launcher" @click="togglePanel">
-          <i class="f7-icons e3i-gray" style="margin-left: 10px;">bars</i>
+          <i class="f7-icons e3i-gray-light" style="margin-left: 10px; font-weight: 600;">bars</i>
         </div>
       </f7-nav-left>
       <f7-nav-center sliding="" class="e3i-blue nav-title">Eco<span style="font-size:11px !important;">3</span> Metrics</f7-nav-center>
