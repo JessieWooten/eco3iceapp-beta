@@ -64,6 +64,14 @@
 
 
 /*Menu Panel Styling*/
+.panel-launcher{
+  width: 70px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .menu-item {
   color: #5a5a5a;
   font-weight: 300;
