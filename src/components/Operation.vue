@@ -36,7 +36,7 @@
             </div>
             <!-- Default -->
             <div v-else class="status-wrapper">
-              <p class="status-text e3i-gray-light">{{ status }}</p>
+              <p class="status-text e3i-gray">{{ status }}</p>
             </div>
 
           </div>
@@ -65,9 +65,13 @@
               <img class="health-icon" src="/static/images/operation/health-change-now.png">
               <p class="health-text e3i-fail">change now</p>
             </div>
+            <!-- Health  === '---' -->
+            <div v-else-if="health === '---'" class="health-wrapper">
+              <p class="health-text e3i-gray-light" style="letter-spacing: 1px;">---</p>
+            </div>
             <!-- Health Default -->
             <div v-else class="health-wrapper">
-              <p class="health-text e3i-gray-light">{{ health }}</p>
+              <p class="health-text e3i-gray">{{ health }}</p>
             </div>
           </div>
           <div class="status-title-wrapper">
@@ -87,7 +91,7 @@
             </div>
             <!-- Default Water Usage Volume -->
             <div v-else class="health-wrapper">
-              <p class="health-text e3i-gray-light">---</p>
+              <p class="health-text e3i-gray-light" style="letter-spacing: 1px;">---</p>
             </div>
           </div>
           <div class="status-title-wrapper">
