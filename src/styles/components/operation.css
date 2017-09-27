@@ -6,7 +6,7 @@
 }
 
 .status-wrapper{
-padding-top: 22px;
+padding-top: 16px;
 }
 
 .status-title-wrapper{
@@ -27,19 +27,20 @@ padding-top: 22px;
 
 .status-text {
   text-align: center;
-  font-size: 25px;
+  font-size: 1.8em;
   margin: 0;
+  padding: 0 10px;
 }
 
 .status-text-blank {
   display: inline-block;
-  font-size: 70px;
+  font-size: 4em;
   margin: 0;
 }
 
 .status-text-ok {
   display: inline-block;
-  font-size: 70px;
+  font-size: 5em;
   padding-right: 20px;
   margin: 0;
 }
@@ -50,6 +51,7 @@ padding-top: 22px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  padding: 0 10px;
 }
 
 .health-wrapper {
@@ -67,15 +69,40 @@ padding-top: 22px;
 
 .health-text {
   display: inline-block;
-  font-size: 25px;
-  /*padding-right: 20px;*/
+  font-size: 1.8em;
   padding-top:20px;
   margin: 0;
-
 }
 
 .water-icon {
   height: 20px;
   display: inline-block;
   padding-right: 5px;
+}
+
+@media (max-height: 600px) {
+  .status-icon {
+    height: 30px;
+  }
+
+  .status-text {
+    font-size: 1.5em;
+  }
+
+  .status-text-ok {
+    font-size: 4em;
+  }
+
+  .health-text {
+    font-size: 1.5em;
+    padding-top: 10px;
+  }
+
+  .box-title {
+    padding-bottom: 10px;
+  }
+
+  .health-icon {
+    width: 22px;
+  }
 }

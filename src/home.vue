@@ -33,13 +33,13 @@
               <h2 class="unit-name">{{ unitName }}</h2>
             </div>
           <!-- main content start -->
-            <f7-swiper>
+            <f7-swiper class="e3i-overflow">
               <f7-swiper-slide>
                 <operation
                   :status="status"
                   :health="health"
                   :waterUsage="waterUsage"
-                  ></operation>
+                ></operation>
               </f7-swiper-slide>
             </f7-swiper>
           <!-- main content end -->
@@ -141,7 +141,6 @@ export default {
   },
   data () {
     return {
-      ajaxData: 'ajax?',
       panelOpened: false,
       resetOpened: false,
       connectOpened: false,
