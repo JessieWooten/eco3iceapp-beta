@@ -82,8 +82,8 @@ export default {
 		}
 	},
     requestUnit: function() {
-        var dcount = 0;
-	this.unitList = [];
+      var dcount = 0;
+	    this.unitList = [];
       var list = this.unitList;
       window.app.scanBle();
       window.tmpinterval  = setInterval(function() {
@@ -92,15 +92,15 @@ export default {
             devices = JSON.parse(window.app.getDevices());
         } catch(e) { devices = null; }
         if(devices != null) {
-            for(var i =0;i<devices.length;i++) {
-	        var found = false;
-		for(var j=0;j<list.length;j++) {
-	                if(devices[i].mac == list[j].mac)
-                 	   found = true;
-		}
-        	if(!found)
-	            list.push(devices[i]);
-            }
+          for(var i =0;i<devices.length;i++) {
+	          var found = false;
+		        for(var j=0;j<list.length;j++) {
+	            if(devices[i].mac == list[j].mac)
+              found = true;
+		        }
+        	  if(!found)
+	          list.push(devices[i]);
+          }
         }
       },100);
       window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
@@ -113,21 +113,21 @@ export default {
     },
     toggleConnect: function() {
       this.connectOpened = !this.connectOpened;
-	if(!this.connectOpened) {
-		window.clearInterval(window.tmpinterval);
-		window.clearTimeout(window.tmptimeout);
-	}
+    	if(!this.connectOpened) {
+    		window.clearInterval(window.tmpinterval);
+    		window.clearTimeout(window.tmptimeout);
+	    }
     },
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
     setSelectedUnit: function(index) {
-	window.clearInterval(window.tmpinterval);
-	window.clearTimeout(window.tmptimeout);
-	var device = this.unitList[index];
-	this.unitName = device.name;
-      	this.selectedUnitIndex = index;
-	window.app.connect(device.mac);
+    	window.clearInterval(window.tmpinterval);
+    	window.clearTimeout(window.tmptimeout);
+    	var device = this.unitList[index];
+    	this.unitName = device.name;
+      this.selectedUnitIndex = index;
+    	window.app.connect(device.mac);
     },
     resetUnit: function(index) {
       //make reset the unit #s not this.data
