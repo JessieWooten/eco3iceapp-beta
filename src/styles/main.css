@@ -55,3 +55,7 @@ body {
 .panel-overlay {
   display: none !important;
 }
+
+.actions-modal-button:after {
+  display: none;
+}
