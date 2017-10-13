@@ -82,6 +82,7 @@ export default {
 		}else if(str.indexOf('new_device') > -1){
       //update JSON list of devices
       //this.unitList = remove new_device: to get new string and jsonparse to unitList || str.subString()
+      this.unitList = JSON.parse(str.subString(11))
     }
 	},
     requestUnit: function() {
