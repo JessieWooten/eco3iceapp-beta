@@ -25,7 +25,7 @@
           :unitList="unitList"
           :selectedUnitIndex="selectedUnitIndex"
           @connectPromptClosed="toggleConnect()"
-          @unitSelected="setSelectedUnit($event),togglePanel()"
+          @unitSelected="setSelectedUnit($event)"
         ></connect-prompt>
         <f7-pages id="pages">
           <f7-page class="navbar-fixed">
@@ -80,8 +80,6 @@ export default {
 			} catch(e) { console.log(e,"error"); }
 
 		}else if(str.indexOf('new_device') > -1){
-      //update JSON list of devices
-      //this.unitList = remove new_device: to get new string and jsonparse to unitList || str.subString()
       this.unitList = JSON.parse(str.subString(11))
     }
 	},
@@ -132,9 +130,11 @@ export default {
     	this.unitName = device.name;
       this.selectedUnitIndex = index;
     	window.app.connect(device.mac);
+      if(this.panelOpened) {
+        this.panelOpened = false;
+      }
     },
     resetUnit: function(index) {
-      //make reset the unit #s not this.data
       this.unitName = '- - -';
       this.status = '---';
       this.health = '---';
