@@ -71,15 +71,18 @@ export default {
 	dataUpdate: function(str) {
 		if(str == "connected") {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
-		} else if(str == "data_ready") {
+		} else if(str.indexOf('data_ready') > -1) { //data_ready:Datafromecoice
 			try {
-				var sdata = JSON.parse(window.app.getData());
+				var sdata = JSON.parse(str.subString(11));
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
 			} catch(e) { console.log(e,"error"); }
 
-		}
+		}else if(str.indexOf('new_device') > -1){
+      //update JSON list of devices
+      //this.unitList = remove new_device: to get new string and jsonparse to unitList || str.subString()
+    }
 	},
     requestUnit: function() {
       var dcount = 0;
@@ -89,17 +92,17 @@ export default {
       window.tmpinterval  = setInterval(function() {
         var devices = null;
         try {
-            devices = JSON.parse(window.app.getDevices());
+          devices = JSON.parse(window.app.getDevices());
         } catch(e) { devices = null; }
         if(devices != null) {
           for(var i =0;i<devices.length;i++) {
 	          var found = false;
 		        for(var j=0;j<list.length;j++) {
 	            if(devices[i].mac == list[j].mac)
-              found = true;
+                found = true;
 		        }
         	  if(!found)
-	          list.push(devices[i]);
+	           list.push(devices[i]);
           }
         }
       },100);
