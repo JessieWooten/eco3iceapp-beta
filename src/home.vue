@@ -31,6 +31,7 @@
           <f7-page class="navbar-fixed">
             <div class="unit-name-container">
               <h2 class="unit-name">{{ unitName }}</h2>
+              <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
             </div>
           <!-- main content start -->
             <f7-swiper class="e3i-overflow">
@@ -42,6 +43,7 @@
                 ></operation>
               </f7-swiper-slide>
             </f7-swiper>
+            <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
           <!-- main content end -->
           </f7-page>
         </f7-pages>
@@ -149,6 +151,7 @@ export default {
       resetOpened: false,
       connectOpened: false,
       unitName: '- - -',
+      version: '',
       status: '---',
       health: '---',
       waterUsage: '---',
