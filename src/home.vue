@@ -75,15 +75,18 @@ export default {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
 		} else if(str.indexOf('data_ready') > -1) { //data_ready:Datafromecoice
 			try {
-				var sdata = JSON.parse(str.subString(11));
+				var sdata = JSON.parse(str.substring(11));
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
-			} catch(e) { console.log(e,"error"); }
+				this.version = sdata.version ? sdata.version : '';
+			} catch(e) { console.log(e,"error"); console.log(str); }
 
 		}else if(str.indexOf('new_device') > -1){
-      this.unitList = JSON.parse(str.subString(11))
-    }
+			try {
+			      this.unitList = JSON.parse(str.substring(11))
+			} catch(e) {}
+	   	 }
 	},
     requestUnit: function() {
       var dcount = 0;
