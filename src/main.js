@@ -17,5 +17,8 @@ window.vue = new Vue({
       root: '#app', //Should be same as app el
       animateNavBackIcon: true,
       routes: Routes
+  },
+  created: function(){
+    window.setTimeout(function() { window.vue.$children[0].toggleConnect(); },100);
   }
 })
