@@ -18,7 +18,8 @@ window.vue = new Vue({
       animateNavBackIcon: true,
       routes: Routes
   },
-  created: function(){
-    window.setTimeout(function() { window.vue.$children[0].toggleConnect(); },100);
+  mounted: function(){
+    this.$children[0].toggleConnect();
+    window.app.scanBle();
   }
 })
