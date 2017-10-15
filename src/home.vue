@@ -43,7 +43,6 @@
                 ></operation>
               </f7-swiper-slide>
             </f7-swiper>
-            <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
           <!-- main content end -->
           </f7-page>
         </f7-pages>
@@ -73,20 +72,18 @@ export default {
 	dataUpdate: function(str) {
 		if(str == "connected") {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
-		} else if(str.indexOf('data_ready') > -1) { //data_ready:Datafromecoice
+		} else if(str.indexOf('data_ready') > -1) {
 			try {
 				var sdata = JSON.parse(str.substring(11));
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
-				this.version = sdata.version ? sdata.version : '';
-			} catch(e) { console.log(e,"error"); console.log(str); }
+        this.version = sdata.version ? sdata.version : '';
+			} catch(e) { console.log(e,"error"); }
 
 		}else if(str.indexOf('new_device') > -1){
-			try {
-			      this.unitList = JSON.parse(str.substring(11))
-			} catch(e) {}
-	   	 }
+      this.unitList = JSON.parse(str.substring(11))
+    }
 	},
     requestUnit: function() {
       var dcount = 0;
