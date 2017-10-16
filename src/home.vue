@@ -26,12 +26,13 @@
           :unitList="unitList"
           :selectedUnitIndex="selectedUnitIndex"
           @connectPromptClosed="toggleConnect()"
-          @unitSelected="setSelectedUnit($event),togglePanel()"
+          @unitSelected="setSelectedUnit($event)"
         ></connect-prompt>
         <f7-pages id="pages">
           <f7-page class="navbar-fixed">
             <div class="unit-name-container">
               <h2 class="unit-name">{{ unitName }}</h2>
+              <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
             </div>
           <!-- main content start -->
             <f7-swiper class="e3i-overflow">
@@ -72,17 +73,17 @@ export default {
 	dataUpdate: function(str) {
 		if(str == "connected") {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
-		} else if(str.indexOf('data_ready') > -1) { //data_ready:Datafromecoice
+		} else if(str.indexOf('data_ready') > -1) {
 			try {
-				var sdata = JSON.parse(str.subString(11));
+				var sdata = JSON.parse(str.substring(11));
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
+        this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
 
 		}else if(str.indexOf('new_device') > -1){
-      //update JSON list of devices
-      //this.unitList = remove new_device: to get new string and jsonparse to unitList || str.subString()
+      this.unitList = JSON.parse(str.substring(11))
     }
 	},
     requestUnit: function() {
@@ -132,9 +133,11 @@ export default {
     	this.unitName = device.name;
       this.selectedUnitIndex = index;
     	window.app.connect(device.mac);
+      if(this.panelOpened) {
+        this.panelOpened = false;
+      }
     },
     resetUnit: function(index) {
-      //make reset the unit #s not this.data
       this.unitName = '- - -';
       this.status = '---';
       this.health = '---';
@@ -149,6 +152,7 @@ export default {
       resetOpened: false,
       connectOpened: false,
       unitName: '- - -',
+      version: '',
       status: '---',
       health: '---',
       waterUsage: '---',

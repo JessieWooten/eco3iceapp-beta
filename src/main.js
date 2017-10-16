@@ -17,5 +17,9 @@ window.vue = new Vue({
       root: '#app', //Should be same as app el
       animateNavBackIcon: true,
       routes: Routes
+  },
+  mounted: function(){
+    this.$children[0].toggleConnect();
+    window.app.scanBle();
   }
 })
