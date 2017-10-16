@@ -7,6 +7,7 @@
         <!-- Menu Panel-->
         <panel
           :is-panel-opened="panelOpened"
+          :selectedUnitIndex="selectedUnitIndex"
           @openResetPrompt="toggleResetPrompt()"
           @openConnectPrompt="toggleConnect(), requestUnit()"
           @closePanel="togglePanel()"
