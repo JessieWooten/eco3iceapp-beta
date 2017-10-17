@@ -108,6 +108,8 @@ export default {
           }
         }
       },100);
+      //remove after ble is obsolete
+      list = list.filter(x => x.indexOf('ecoice') != -1)
       window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
     },
     togglePanel: function() {
