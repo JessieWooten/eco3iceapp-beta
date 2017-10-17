@@ -14,6 +14,14 @@
           <i class="f7-icons menu-icon">social_rss_fill</i>
         </f7-list-item>
         <f7-list-item
+          v-if="selectedUnitIndex == -1"
+          title="Reset Unit"
+          class="menu-item disabled"
+        >
+          <i class="f7-icons menu-icon-reset disabled">refresh</i>
+        </f7-list-item>
+        <f7-list-item
+          v-else
           title="Reset Unit"
           class="menu-item"
           @click="openResetPrompt"
@@ -30,7 +38,8 @@ import { promptBus } from '../main'
 export default {
   props: {
     isPanelOpened: Boolean,
-    isResetOpened: Boolean
+    isResetOpened: Boolean,
+    selectedUnitIndex: Number
   },
   methods: {
     openConnectPrompt: function() {
