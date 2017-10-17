@@ -19,6 +19,7 @@ window.vue = new Vue({
       routes: Routes
   },
   mounted: function(){
+    window.app.inApp();
     this.$children[0].toggleConnect();
     window.app.scanBle();
   }
