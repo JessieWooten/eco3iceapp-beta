@@ -38,8 +38,8 @@
             <f7-swiper class="e3i-overflow">
               <f7-swiper-slide>
                 <operation
-                  :status="status"
-                  :health="health"
+                  :status="cleanUpInput(status)"
+                  :health="cleanUpInput(health)"
                   :waterUsage="waterUsage"
                 ></operation>
               </f7-swiper-slide>
