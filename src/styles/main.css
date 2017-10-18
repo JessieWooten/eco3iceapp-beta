@@ -1,14 +1,35 @@
 body {
-  background-image: '../static/images/franke_eco.jpg';
-  background-repeat: no-repeat;
+  background: -webkit-linear-gradient(bottom left, #25728c, #8ddaf5);
+  background: -o-linear-gradient(bottom left, #25728c, #8ddaf5);
+  background: linear-gradient(to top right, #25728c, #8ddaf5);
 }
 
 /*Framework7 class restyling*/
-.page-content {
+/*.page-content {
   background: -webkit-linear-gradient(bottom left, #25728c, #8ddaf5);
   background: -o-linear-gradient(bottom left, #25728c, #8ddaf5);
   background: linear-gradient(to top right, #25728c, #8ddaf5);
   padding-top: 0 !important;
+}*/
+.page {
+  background: none !important;
+}
+.pages {
+  background: none !important;
+}
+
+.preloader {
+  height: 20px;
+  width: 20px;
+}
+
+.pull-to-refresh-arrow {
+background-image: none !important;
+text-align: center;
+}
+
+.pull-to-refresh-layer:first-of-type {
+    display: none;
 }
 
 .content-block-inner {
