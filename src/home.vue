@@ -155,7 +155,7 @@ export default {
     },
     pullToRefresh: function (event, done) {
       setTimeout(function(){
-        if(window.app.connected()){
+        if(window.app.isConnected()){
           window.app.sendCommand("dr");
         }
         done()
