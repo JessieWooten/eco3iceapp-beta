@@ -2,8 +2,6 @@
   <div id="app">
     <f7-views navbar-through="">
       <f7-view main="" url="/" :dynamic-navbar="true">
-        <!-- Navigation Bar -->
-        <navigation @togglePanel="togglePanel()"></navigation>
         <!-- Menu Panel-->
         <panel
           :is-panel-opened="panelOpened"
@@ -28,8 +26,16 @@
           @connectPromptClosed="toggleConnect()"
           @unitSelected="setSelectedUnit($event)"
         ></connect-prompt>
+        <!--Page start -->
         <f7-pages id="pages">
-          <f7-page class="navbar-fixed">
+          <!-- Navigation Bar -->
+          <navigation @togglePanel="togglePanel()"></navigation>
+          <f7-page class="navbar-fixed" pull-to-refresh @ptr:refresh="pullToRefresh" color="white">
+            <!-- Pull to refresh -->
+            <div class="pull-to-refresh-layer">
+              <div class="preloader preloader-white"></div>
+              <div class="pull-to-refresh-arrow"><i class="f7-icons color-white">arrow_down</i></div>
+            </div>
             <div class="unit-name-container">
               <h2 class="unit-name">{{ unitName }}</h2>
               <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
@@ -91,7 +97,7 @@ export default {
 	    this.unitList = [];
       var list = this.unitList;
       window.app.scanBle();
-      window.tmpinterval  = setInterval(function() {
+      window.tmpinterval = setInterval(function() {
         var devices = null;
         try {
           devices = JSON.parse(window.app.getDevices());
@@ -146,6 +152,14 @@ export default {
       this.waterUsage = '---';
       this.selectedUnitIndex = -1;
       window.app.sendCommand('reset');
+    },
+    pullToRefresh: function (event, done) {
+      setTimeout(function(){
+        if(window.app.connected()){
+          window.app.sendCommand("dr");
+        }
+        done()
+      }, 1000)
     }
   },
   data () {
