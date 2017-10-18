@@ -87,7 +87,9 @@ export default {
 				this.waterUsage = sdata.volume;
         this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
-
+      try{
+        done();
+      } catch(e){}
 		}else if(str.indexOf('new_device') > -1){
       this.unitList = JSON.parse(str.substring(11))
     }
@@ -154,12 +156,14 @@ export default {
       window.app.sendCommand('reset');
     },
     pullToRefresh: function (event, done) {
+      if(window.app.isConnected() && this.selectedUnitIndex != -1){
+        window.app.sendCommand("dr");
+      }
       setTimeout(function(){
-        if(window.app.isConnected()){
-          window.app.sendCommand("dr");
-        }
-        done()
-      }, 1000)
+        try{
+          done();
+        } catch(e){}
+      }, 5000)
     }
   },
   data () {
