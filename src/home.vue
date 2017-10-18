@@ -91,7 +91,8 @@ export default {
         done();
       } catch(e){}
 		}else if(str.indexOf('new_device') > -1){
-      this.unitList = JSON.parse(str.substring(11))
+      //remove filter after ble is obsolete
+      this.unitList = JSON.parse(str.substring(11)).filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
     }
 	},
     requestUnit: function() {
@@ -116,8 +117,6 @@ export default {
           }
         }
       },100);
-      //remove filter after ble is obsolete
-      list = list.filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
       window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
     },
     togglePanel: function() {
@@ -158,6 +157,8 @@ export default {
     pullToRefresh: function (event, done) {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
         window.app.sendCommand("dr");
+      }else{
+        done()
       }
       setTimeout(function(){
         try{
