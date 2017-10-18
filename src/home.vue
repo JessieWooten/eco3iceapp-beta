@@ -85,11 +85,9 @@ export default {
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
-        this.version = sdata.version ? sdata.version : '';
+			        this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
-      try{
-        done();
-      } catch(e){}
+			try { window.prDone(); } catch(e) { };
 		}else if(str.indexOf('new_device') > -1){
       //remove filter after ble is obsolete
       this.unitList = JSON.parse(str.substring(11)).filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
@@ -155,10 +153,11 @@ export default {
       window.app.sendCommand('reset');
     },
     pullToRefresh: function (event, done) {
+	window.prDone = done;
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
         window.app.sendCommand("dr");
       }else{
-        done()
+        done();
       }
       setTimeout(function(){
         try{
