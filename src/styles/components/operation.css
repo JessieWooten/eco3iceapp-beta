@@ -80,6 +80,25 @@ padding-top: 16px;
   padding-right: 5px;
 }
 
+/* Disconnect Launcher Styling */
+.disconnect-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.disconnect-launcher {
+  width: 35px;
+  height: 35px;
+}
+
+.disconnect-icon {
+  text-align: center;
+  display: block;
+  opacity: .3;
+  font-size: 28px;
+  color: #ffffff;
+}
+
 @media (max-height: 600px) {
   .status-icon {
     height: 30px;
