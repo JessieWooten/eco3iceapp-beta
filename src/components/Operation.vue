@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="status-title-wrapper">
-            <span class="box-title">cartidge health</span>
+            <span class="box-title">cartridge health</span>
           </div>
         </div>
       </div>
