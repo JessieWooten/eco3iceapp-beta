@@ -26,6 +26,13 @@
           @connectPromptClosed="toggleConnect()"
           @unitSelected="setSelectedUnit($event)"
         ></connect-prompt>
+        <!-- Disconnect Prompt -->
+        <disconnect-prompt
+          :isDisconnectOpened="disconnectOpened"
+          :unit-name="unitName"
+          @disconnectClosed="toggleDisconnectPrompt()"
+          @disconnectUnit="disconnectUnit()"
+        ></disconnect-prompt>
         <!--Page start -->
         <f7-pages id="pages">
           <!-- Navigation Bar -->
@@ -48,6 +55,11 @@
                   :health="cleanUpInput(health)"
                   :waterUsage="waterUsage"
                 ></operation>
+                <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
+                  <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
+                    <i class="f7-icons disconnect-icon">close</i>
+                  </div>
+                </div>
               </f7-swiper-slide>
             </f7-swiper>
           <!-- main content end -->
@@ -64,6 +76,7 @@ import Operation from './components/Operation.vue'
 import Panel from './components/Panel.vue'
 import ResetPrompt from './components/menu/Reset.vue'
 import ConnectPrompt from './components/menu/Connect.vue'
+import DisconnectPrompt from './components/menu/Disconnect.vue'
 export default {
   name: 'app',
   components: {
@@ -71,6 +84,7 @@ export default {
     Operation,
     Panel,
     ResetPrompt,
+    DisconnectPrompt,
     ConnectPrompt
   },
   computed: {
@@ -130,6 +144,9 @@ export default {
     		window.clearTimeout(window.tmptimeout);
 	    }
     },
+    toggleDisconnectPrompt: function() {
+      this.disconnectOpened = !this.disconnectOpened;
+    },
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
@@ -144,13 +161,19 @@ export default {
         this.panelOpened = false;
       }
     },
-    resetUnit: function(index) {
-      this.unitName = '- - -';
-      this.status = '---';
-      this.health = '---';
-      this.waterUsage = '---';
-      this.selectedUnitIndex = -1;
+    resetUnit: function() {
       window.app.sendCommand('reset');
+    },
+    disconnectUnit: function() {
+      if(window.app.isConnected() && this.selectedUnitIndex != -1){
+        this.unitName = '- - -';
+        this.status = '---';
+        this.health = '---';
+        this.waterUsage = '---';
+        this.selectedUnitIndex = -1;
+        this.version = '';
+        window.app.disconnect();
+      }
     },
     pullToRefresh: function (event, done) {
 	window.prDone = done;
@@ -171,6 +194,7 @@ export default {
       panelOpened: false,
       resetOpened: false,
       connectOpened: false,
+      disconnectOpened: false,
       unitName: '- - -',
       version: '',
       status: '---',
