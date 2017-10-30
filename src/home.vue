@@ -99,13 +99,16 @@ export default {
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
-			        this.version = sdata.version ? sdata.version : '';
+			  this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
 			try { window.prDone(); } catch(e) { };
-		}else if(str.indexOf('new_device') > -1){
+		} else if(str.indexOf('new_device') > -1){
       //remove filter after ble is obsolete
       this.unitList = JSON.parse(str.substring(11)).filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
+    } else if (str.indexOf("eset_saved") > -1) {
+      setTimeout(function() { window.app.sendCommand("dr");},500);
     }
+
 	},
     requestUnit: function() {
       var dcount = 0;
@@ -150,19 +153,28 @@ export default {
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
+    displayIsLoading: function() {
+      this.status = 'loading';
+      this.health = 'loading';
+      this.waterUsage = 'loading';
+    },
     setSelectedUnit: function(index) {
     	window.clearInterval(window.tmpinterval);
     	window.clearTimeout(window.tmptimeout);
     	var device = this.unitList[index];
     	this.unitName = device.name;
       this.selectedUnitIndex = index;
+      this.displayIsLoading()
     	window.app.connect(device.mac);
       if(this.panelOpened) {
         this.panelOpened = false;
       }
     },
     resetUnit: function() {
-      window.app.sendCommand('reset');
+      if(window.app.isConnected() && this.selectedUnitIndex != -1){
+        this.displayIsLoading();
+        window.app.sendCommand('reset');
+      }
     },
     disconnectUnit: function() {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
