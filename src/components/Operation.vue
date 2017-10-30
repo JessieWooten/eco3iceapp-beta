@@ -34,6 +34,12 @@
             <div v-else-if="status === '---'" class="status-wrapper">
               <p class="status-text-blank e3i-gray-light">---</p>
             </div>
+            <!-- status is loading -->
+            <div v-else-if="status === 'loading'" class="status-wrapper">
+              <div class="preloader-status">
+                <div class="preloader" style="height: 25px; width: 25px;"></div>
+              </div>
+            </div>
             <!-- Default -->
             <div v-else class="status-wrapper">
               <p class="status-text e3i-gray">{{ status }}</p>
@@ -69,6 +75,12 @@
             <div v-else-if="health === '---'" class="health-wrapper">
               <p class="health-text e3i-gray-light" style="letter-spacing: 1px;">---</p>
             </div>
+            <!-- Health is loading -->
+            <div v-else-if="health === 'loading'" class="status-wrapper">
+              <div class="preloader-health">
+                <div class="preloader" style="width: 25px; height: 25px;"></div>
+              </div>
+            </div>
             <!-- Health Default -->
             <div v-else class="health-wrapper">
               <p class="health-text e3i-gray">{{ health }}</p>
@@ -84,14 +96,20 @@
       <div class="content-block-inner">
         <div class="e3i-content-sm">
           <div class="health-container">
+            <!-- Default Water Usage Volume -->
+            <div v-if="waterUsage === '---'" class="health-wrapper">
+              <p class="health-text e3i-gray-light" style="letter-spacing: 1px;">---</p>
+            </div>
+            <!-- Water Usage is loading -->
+            <div v-else-if="waterUsage === 'loading'" class="status-wrapper">
+              <div class="preloader-health">
+                <div class="preloader" style="width: 25px; height: 25px;"></div>
+              </div>
+            </div>
             <!-- Water Usage Volume # -->
-            <div v-if="waterUsage != '---'" class="health-wrapper">
+            <div v-else class="health-wrapper">
               <img class="water-icon" src="static/images/operation/water-drop.png">
               <p class="health-text e3i-blue">{{ waterUsage }} gals</p>
-            </div>
-            <!-- Default Water Usage Volume -->
-            <div v-else class="health-wrapper">
-              <p class="health-text e3i-gray-light" style="letter-spacing: 1px;">---</p>
             </div>
           </div>
           <div class="status-title-wrapper">
