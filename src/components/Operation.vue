@@ -37,7 +37,7 @@
             <!-- status is loading -->
             <div v-else-if="status === 'loading'" class="status-wrapper">
               <div class="preloader-status">
-                <div class="preloader" style="height: 25px; width: 25px;"></div>
+                <div class="preloader preloader-gray" style="height: 25px; width: 25px;"></div>
               </div>
             </div>
             <!-- Default -->
@@ -78,7 +78,7 @@
             <!-- Health is loading -->
             <div v-else-if="health === 'loading'" class="status-wrapper">
               <div class="preloader-health">
-                <div class="preloader" style="width: 25px; height: 25px;"></div>
+                <div class="preloader preloader-gray" style="width: 25px; height: 25px;"></div>
               </div>
             </div>
             <!-- Health Default -->
@@ -103,7 +103,7 @@
             <!-- Water Usage is loading -->
             <div v-else-if="waterUsage === 'loading'" class="status-wrapper">
               <div class="preloader-health">
-                <div class="preloader" style="width: 25px; height: 25px;"></div>
+                <div class="preloader preloader-gray" style="width: 25px; height: 25px;"></div>
               </div>
             </div>
             <!-- Water Usage Volume # -->
