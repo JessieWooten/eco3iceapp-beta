@@ -109,11 +109,13 @@
             <!-- Water Usage Volume # -->
             <div v-else class="health-wrapper">
               <img class="water-icon" src="static/images/operation/water-drop.png">
-              <p class="health-text e3i-blue">{{ waterUsage }} gals</p>
+              <p v-if="this.imperial" class="health-text e3i-blue">{{ waterUsage }} gals</p>
+              <p v-else class="health-text e3i-blue">{{ convertToLiters(waterUsage) }} liters</p>
             </div>
           </div>
           <div class="status-title-wrapper">
-            <span class="box-title">total gallons of water</span>
+            <span v-if="this.imperial" class="box-title">total gallons of water</span>
+            <span v-else class="box-title">total liters of water</span>
           </div>
         </div>
       </div>
@@ -126,7 +128,16 @@ export default {
   props: {
     status: String,
     health: String,
-    waterUsage: String
+    waterUsage: String,
+    imperial: Boolean
+  },
+  methods:{
+    convertToLiters: function(gals) {
+      if(Number(gals) != NaN){
+        const liter = 0.264172052;
+        return Math.round(gals / liter);
+      }
+    }
   },
   data: function() {
     return {
