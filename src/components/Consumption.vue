@@ -16,10 +16,18 @@
                 <div class="preloader preloader-gray" style="width: 25px; height: 25px;"></div>
               </div>
             </div>
-            <!-- Daily Consumption # -->
+            <!-- Daily Consumption # in LBS-->
             <div v-else class="status-wrapper">
-              <p class="consumption-text e3i-success">{{ consumption }}</p>
-              <img class="status-icon-inline" src="static/images/consumption/lbs.png">
+              <!--LBS-->
+              <div v-if="this.imperial">
+                <p class="consumption-text e3i-success">{{ consumption }}</p>
+                <img class="status-icon-inline" src="static/images/consumption/lbs.png">
+              </div>
+              <!--KGS-->
+              <div v-else>
+                <p class="consumption-text e3i-success">{{ convertToKgs(consumption) }}</p>
+                <img class="status-icon-inline" src="static/images/consumption/kgs.png">
+              </div>
             </div>
           </div>
           <div class="status-title-wrapper">
@@ -55,9 +63,18 @@
               </div>
               <!-- Average Monthly Consumption #-->
               <div v-else style="padding-top: 7px;">
-                <span class="avg-consumption-number e3i-success">{{ averageConsumption }}</span>
-                <img class="avg-consumption-icon" src="static/images/consumption/lbs.png">
-                <p class="avg-consumption-display__daily">daily</p>
+                <!--LBS-->
+                <div v-if="this.imperial">
+                  <span class="avg-consumption-number e3i-success">{{ averageConsumption }}</span>
+                  <img class="avg-consumption-icon" src="static/images/consumption/lbs.png">
+                  <p class="avg-consumption-display__daily">daily</p>
+                </div>
+                <!--KGS-->
+                <div v-else>
+                  <span class="avg-consumption-number e3i-success">{{ convertToKgs(averageConsumption) }}</span>
+                  <img class="avg-consumption-icon" src="static/images/consumption/kgs.png">
+                  <p class="avg-consumption-display__daily">daily</p>
+                </div>
               </div>
             </div>
           </div>
@@ -110,7 +127,16 @@ export default {
   props: {
     consumption: String,
     averageDuty:String,
-    averageConsumption: String
+    averageConsumption: String,
+    imperial: Boolean
+  },
+  methods: {
+    convertToKgs: function(lbs) {
+      if(Number(lbs) != NaN){
+        const kgs = 0.45359237;
+        return Math.round(lbs * kgs)
+      }
+    }
   },
   data: function() {
     return {
