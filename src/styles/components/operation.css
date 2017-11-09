@@ -115,6 +115,67 @@ padding-top: 16px;
   color: #ffffff !important;
 }
 
+
+
+
+/*|||| CONSUMPTION STYLING ||||*/
+.consumption-text {
+  display: inline-block;
+  font-size: 4em;
+  margin: 0;
+}
+
+.avg-consumption-wrapper__title {
+  width: 60%;
+  height: 100%;
+  display: inline-block;
+}
+
+.avg-consumption__title {
+  padding-left: 20px;
+  display: block;
+  margin: 0;
+  align-self: flex-start;
+}
+
+.avg-consumption-wrapper__display {
+  width:35%;
+  height: 100%;
+  display: inline-block;
+  align-self: flex-end;
+  margin: auto;
+}
+.avg-consumption-display__top {
+  width: 100%;
+
+}
+
+.avg-consumption-display__bottom {
+width: 100%;
+
+}
+
+.avg-consumption-number {
+  text-align: right;
+  display: inline-block;
+  font-size: 2.7em;
+}
+
+.avg-consumption-display__daily {
+  margin: 0;
+  color: #b6b2b2;
+  text-align: right;
+  position: relative;
+  bottom: 11px;
+  font-size: 1.3em;
+}
+.avg-consumption-icon {
+  height: 30px;
+  display: inline-block;
+  margin: auto;
+}
+
+
 @media (max-height: 645px) {
   .status-icon {
     height: 30px;
@@ -139,5 +200,10 @@ padding-top: 16px;
 
   .health-icon {
     width: 22px;
+  }
+
+  .avg-consumption-display__daily {
+    bottom: 11px;
+    font-size: 1em;
   }
 }
