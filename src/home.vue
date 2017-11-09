@@ -6,9 +6,11 @@
         <panel
           :is-panel-opened="panelOpened"
           :selectedUnitIndex="selectedUnitIndex"
+          :imperial="imperial"
           @openResetPrompt="toggleResetPrompt()"
           @openConnectPrompt="toggleConnect(), requestUnit()"
           @closePanel="togglePanel()"
+          @switchMeasurements="toggleMeasurements()"
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
@@ -54,6 +56,7 @@
                   :status="cleanUpInput(status)"
                   :health="cleanUpInput(health)"
                   :waterUsage="waterUsage"
+                  :imperial="imperial"
                 ></operation>
                 <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
                   <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
@@ -66,6 +69,7 @@
                   :consumption="consumption"
                   :averageDuty="averageDuty"
                   :averageConsumption="averageConsumption"
+                  :imperial="imperial"
                 ></consumption>
                 <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
                   <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
@@ -167,6 +171,9 @@ export default {
     toggleDisconnectPrompt: function() {
       this.disconnectOpened = !this.disconnectOpened;
     },
+    toggleMeasurements: function() {
+      this.imperial = !this.imperial;
+    },
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
@@ -230,14 +237,15 @@ export default {
       resetOpened: false,
       connectOpened: false,
       disconnectOpened: false,
+      imperial: true,
       unitName: '- - -',
       version: '',
       status: '---',
       health: '---',
       waterUsage: '---',
       consumption: '---',
-      averageDuty:'---',
       averageConsumption: '---',
+      averageDuty:'---',
       selectedUnitIndex: -1,
       unitList: []
     }
