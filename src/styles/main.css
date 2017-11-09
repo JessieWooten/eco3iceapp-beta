@@ -5,12 +5,6 @@ body {
 }
 
 /*Framework7 class restyling*/
-/*.page-content {
-  background: -webkit-linear-gradient(bottom left, #25728c, #8ddaf5);
-  background: -o-linear-gradient(bottom left, #25728c, #8ddaf5);
-  background: linear-gradient(to top right, #25728c, #8ddaf5);
-  padding-top: 0 !important;
-}*/
 .page {
   background: none !important;
 }
@@ -79,4 +73,8 @@ text-align: center;
 
 .actions-modal-button:after {
   display: none;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ffffff !important;
 }
