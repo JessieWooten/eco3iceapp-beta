@@ -116,14 +116,34 @@
   font-weight: 600;
 }
 
+.menu-icon-img {
+  height: 10px;
+  position: absolute;
+  right: 12px;
+  top: 18px;
+}
+
 .menu-logo-container {
   display: flex;
   justify-content: center;
   margin: 18px 0;
 }
 
+.menu-drop-down {
+
+  height:55px;
+  width: 100%;
+  border-top: 1px solid rgba(200,199,204, .3);
+}
+
 .disabled {
   color: #cccccc;
+  border-bottom: 0 !important;
+}
+
+.menu-measurement {
+  margin: 1em;
+  border-bottom: 1px solid #4ee038;
 }
 
 /*Reset Prompt Styling*/
@@ -200,7 +220,7 @@ color: #dc281e;
   justify-content: center;
 }
 
-@media (max-height: 600px) {
+@media (max-height: 645px) {
   .box-title {
     font-size: 1em;
   }
