@@ -48,13 +48,25 @@
               <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
             </div>
           <!-- main content start -->
-            <f7-swiper class="e3i-overflow">
+            <f7-swiper class="e3i-overflow" pagination>
               <f7-swiper-slide>
                 <operation
                   :status="cleanUpInput(status)"
                   :health="cleanUpInput(health)"
                   :waterUsage="waterUsage"
                 ></operation>
+                <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
+                  <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
+                    <i class="f7-icons disconnect-icon">close</i>
+                  </div>
+                </div>
+              </f7-swiper-slide>
+              <f7-swiper-slide>
+                <consumption
+                  :consumption="consumption"
+                  :averageDuty="averageDuty"
+                  :averageConsumption="averageConsumption"
+                ></consumption>
                 <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
                   <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
                     <i class="f7-icons disconnect-icon">close</i>
@@ -73,6 +85,7 @@
 <script>
 import Navigation from './components/Navigation.vue'
 import Operation from './components/Operation.vue'
+import Consumption from './components/Consumption.vue'
 import Panel from './components/Panel.vue'
 import ResetPrompt from './components/menu/Reset.vue'
 import ConnectPrompt from './components/menu/Connect.vue'
@@ -82,6 +95,7 @@ export default {
   components: {
     Navigation,
     Operation,
+    Consumption,
     Panel,
     ResetPrompt,
     DisconnectPrompt,
@@ -99,6 +113,9 @@ export default {
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
+        this.consumption = sdata.consumption;
+        this.averageDuty = sdata.avg_duty;
+        this.averageConsumption = sdata.avg_consumption;
 			  this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
 			try { window.prDone(); } catch(e) { };
@@ -157,6 +174,9 @@ export default {
       this.status = 'loading';
       this.health = 'loading';
       this.waterUsage = 'loading';
+      this.consumption = 'loading';
+      this.averageDuty = 'loading';
+      this.averageConsumption= 'loading';
     },
     setSelectedUnit: function(index) {
     	window.clearInterval(window.tmpinterval);
@@ -182,6 +202,9 @@ export default {
         this.status = '---';
         this.health = '---';
         this.waterUsage = '---';
+        this.consumption = '---';
+        this.averageDuty = '---';
+        this.averageConsumption= '---';
         this.selectedUnitIndex = -1;
         this.version = '';
         window.app.disconnect();
@@ -212,6 +235,9 @@ export default {
       status: '---',
       health: '---',
       waterUsage: '---',
+      consumption: '---',
+      averageDuty:'---',
+      averageConsumption: '---',
       selectedUnitIndex: -1,
       unitList: []
     }
