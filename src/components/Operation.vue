@@ -133,7 +133,7 @@ export default {
   },
   methods:{
     convertToLiters: function(gals) {
-      if(Number(gals) != NaN){
+      if(!isNaN(Number(gals))){
         const liter = 0.264172052;
         return Math.round(gals / liter);
       }

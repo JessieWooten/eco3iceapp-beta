@@ -132,7 +132,7 @@ export default {
   },
   methods: {
     convertToKgs: function(lbs) {
-      if(Number(lbs) != NaN){
+      if(!isNaN(Number(lbs))){
         const kgs = 0.45359237;
         return Math.round(lbs * kgs)
       }
