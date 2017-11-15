@@ -17,6 +17,10 @@ body {
   width: 20px;
 }
 
+.popup {
+  background: none!important;
+}
+
 .pull-to-refresh-arrow {
 background-image: none !important;
 text-align: center;
@@ -38,6 +42,10 @@ text-align: center;
 .inset {
   margin-top:15px !important;
   margin-bottom: 15px !important;
+}
+
+.item-inner {
+  padding-right: 0;
 }
 
 .navbar-inner {
@@ -77,4 +85,38 @@ text-align: center;
 
 .swiper-pagination-bullet-active {
   background: #ffffff !important;
+}
+
+li div.item-content .item-inner {
+  padding: 0;
+}
+
+.item-content {
+  padding: 0 !important;
+}
+
+.accordion-item-content {
+  background-color: #f2f2f2 !important;
+}
+
+.item-title {
+  padding-left: 15px;
+}
+
+.swiper-pagination-bullets {
+  bottom: 0 !important;
+}
+
+@media (min-height: 630px) and (min-width: 630px){
+  .popup:not(.tablet-fullscreen) {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    margin-left: 0;
+    margin-top: 0;
+  }
+  .popup div.flex div.card{
+    height: 20%;
+  }
 }
