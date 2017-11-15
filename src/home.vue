@@ -7,10 +7,13 @@
           :is-panel-opened="panelOpened"
           :selectedUnitIndex="selectedUnitIndex"
           :imperial="imperial"
+          :unitName="unitName"
           @openResetPrompt="toggleResetPrompt()"
           @openConnectPrompt="toggleConnect(), requestUnit()"
           @closePanel="togglePanel()"
           @switchMeasurements="toggleMeasurements()"
+          @setNewName="setNewName($event),togglePanel()"
+          @setCapacity="setCapacity($event)"
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
@@ -35,6 +38,12 @@
           @disconnectClosed="toggleDisconnectPrompt()"
           @disconnectUnit="disconnectUnit()"
         ></disconnect-prompt>
+        <popup
+          :popupOpened="popupOpened"
+          :popupSaveOpened="popupSaveOpened"
+          :popupWasReset="popupWasReset"
+          :popupResetOpened="popupResetOpened"
+        ></popup>
         <!--Page start -->
         <f7-pages id="pages">
           <!-- Navigation Bar -->
@@ -46,7 +55,10 @@
               <div class="pull-to-refresh-arrow"><i class="f7-icons color-white">arrow_down</i></div>
             </div>
             <div class="unit-name-container">
-              <h2 class="unit-name">{{ unitName }}</h2>
+              <div v-if='nameIsLoading' class="flex" style="margin-top: 22px;">
+                <div class="preloader preloader-white"></div>
+              </div>
+              <h2 v-else class="unit-name">{{ unitName }}</h2>
               <span v-if="this.version!= ''" class="unit-version">v.{{ version }}</span>
             </div>
           <!-- main content start -->
@@ -94,6 +106,7 @@ import Panel from './components/Panel.vue'
 import ResetPrompt from './components/menu/Reset.vue'
 import ConnectPrompt from './components/menu/Connect.vue'
 import DisconnectPrompt from './components/menu/Disconnect.vue'
+import Popup from './components/menu/Popup.vue'
 export default {
   name: 'app',
   components: {
@@ -103,7 +116,8 @@ export default {
     Panel,
     ResetPrompt,
     DisconnectPrompt,
-    ConnectPrompt
+    ConnectPrompt,
+    Popup
   },
   computed: {
   },
@@ -111,7 +125,7 @@ export default {
 	dataUpdate: function(str) {
 		if(str == "connected") {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
-		} else if(str.indexOf('data_ready') > -1) {
+		}else if(str.indexOf('data_ready') > -1) {
 			try {
 				var sdata = JSON.parse(str.substring(11));
 				this.status = sdata.status;
@@ -123,13 +137,41 @@ export default {
 			  this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
 			try { window.prDone(); } catch(e) { };
-		} else if(str.indexOf('new_device') > -1){
+		}else if(str.indexOf('new_device') > -1){
       //remove filter after ble is obsolete
       this.unitList = JSON.parse(str.substring(11)).filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
-    } else if (str.indexOf("eset_saved") > -1) {
+    }else if (str.indexOf("eset_saved") > -1) {
       setTimeout(function() { window.app.sendCommand("dr");},500);
+      this.popupResetOpened = false;
+      this.popupWasReset = true;
+      var self = this;
+      setTimeout(function(){self.popupWasReset = false}, 1000)
+    }else if(str.indexOf('name_saved') > -1){
+      var xhttp = new XMLHttpRequest();
+      var self = this;
+      var request = "http://" + this.mac + ':8081/info'
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var device = JSON.parse(this.responseText);
+          self.unitName = device.name;
+          self.nameIsLoading = false;
+          self.popupOpened = false;
+          self.popupSaveOpened = true;
+          var that = self
+          setTimeout(function(){that.popupSaveOpened = false}, 1000)
+         }
+      };
+      xhttp.open("GET", request, true);
+      xhttp.send();
+    }else if(str.indexOf('capacity_saved')> -1){
+      this.popupOpened = false;
+      console.log('capacity saved.')
+      this.popupSaveOpened = true;
+      var self = this;
+      setTimeout(function(){self.popupSaveOpened = false}, 1000)
+    }else{
+      console.log("didint fit dataUpdate case: " + str)
     }
-
 	},
     requestUnit: function() {
       var dcount = 0;
@@ -190,6 +232,7 @@ export default {
     	window.clearTimeout(window.tmptimeout);
     	var device = this.unitList[index];
     	this.unitName = device.name;
+      this.mac = device.ip;
       this.selectedUnitIndex = index;
       this.displayIsLoading()
     	window.app.connect(device.mac);
@@ -197,9 +240,27 @@ export default {
         this.panelOpened = false;
       }
     },
+    setNewName: function (name) {
+      if(window.app.isConnected() && this.selectedUnitIndex != -1){
+        //console.log('window.app.sendCommand(\'rename:' + name + '\')')
+        window.app.sendCommand('rename:' + name);
+        this.nameIsLoading = true;
+        this.popupOpened = true;
+      }
+    },
+    setCapacity: function(capacity){
+      if(window.app.isConnected() && this.selectedUnitIndex != -1){
+        window.app.sendCommand('capacity:' + capacity)
+        console.log("window.app.sendCommand('capacity:' + capacity)")
+        this.popupOpened = true;
+        //self = this
+        // setTimeout(function(){self.popupOpened = false}, 1000)
+      }
+    },
     resetUnit: function() {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
         this.displayIsLoading();
+        this.popupResetOpened = true;
         window.app.sendCommand('reset');
       }
     },
@@ -207,6 +268,7 @@ export default {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
         this.unitName = '- - -';
         this.status = '---';
+        this.mac = '';
         this.health = '---';
         this.waterUsage = '---';
         this.consumption = '---';
@@ -237,8 +299,14 @@ export default {
       resetOpened: false,
       connectOpened: false,
       disconnectOpened: false,
+      popupOpened: false,
+      popupResetOpened: false,
+      popupWasReset:false,
+      popupSaveOpened: false,
+      nameIsLoading: false,
       imperial: true,
       unitName: '- - -',
+      mac: '',
       version: '',
       status: '---',
       health: '---',
