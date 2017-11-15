@@ -168,7 +168,9 @@ width: 100%;
   position: relative;
   bottom: 11px;
   font-size: 1.3em;
+  font-weight: 300;
 }
+
 .avg-consumption-icon {
   height: 30px;
   display: inline-block;
@@ -206,4 +208,17 @@ width: 100%;
     bottom: 11px;
     font-size: 1em;
   }
+
+  .consumption-text {
+    display: inline-block;
+    font-size: 3em;
+    margin: 0;
+  }
+
+  .avg-consumption-number {
+    text-align: right;
+    display: inline-block;
+    font-size: 2em;
+  }
+
 }
