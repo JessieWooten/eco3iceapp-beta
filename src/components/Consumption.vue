@@ -1,8 +1,8 @@
 <template lang="html">
-  <div>
+  <div style="height: 80vh">
     <h3 class="page-title">consumption</h3>
     <!-- Daily Consumption Block Start -->
-    <div class="content-block inset">
+    <div class="content-block inset flex e3i-scale-lg">
       <div class="content-block-inner">
         <div class="e3i-content-lg">
           <div class="status-container">
@@ -37,7 +37,7 @@
       </div>
     </div>
     <!-- Monthly Avg Consumption Block Start -->
-    <div class="content-block inset" >
+    <div class="content-block inset flex e3i-scale-sm" >
       <div class="content-block-inner">
         <div class="e3i-content-sm flex">
           <div class="avg-consumption-wrapper__title">
@@ -82,7 +82,7 @@
       </div>
     </div>
     <!-- Monthly Avg Duty Cycle Block Start -->
-    <div class="content-block inset" >
+    <div class="content-block inset flex e3i-scale-sm" >
       <div class="content-block-inner">
         <div class="e3i-content-sm flex">
           <div class="avg-consumption-wrapper__title">
@@ -115,6 +115,11 @@
         </div>
       </div>
     </div>
+    <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
+      <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
+        <i class="f7-icons disconnect-icon">close</i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -128,7 +133,8 @@ export default {
     consumption: String,
     averageDuty:String,
     averageConsumption: String,
-    imperial: Boolean
+    imperial: Boolean,
+    selectedUnitIndex: Number
   },
   methods: {
     convertToKgs: function(lbs) {
@@ -136,6 +142,9 @@ export default {
         const kgs = 0.45359237;
         return Math.round(lbs * kgs)
       }
+    },
+    toggleDisconnectPrompt: function() {
+      this.$emit('toggleDisconnectPrompt')
     }
   },
   data: function() {

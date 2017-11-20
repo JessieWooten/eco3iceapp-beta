@@ -33,6 +33,7 @@ text-align: center;
 .content-block-inner {
   padding-top: 0;
   padding-bottom: 0;
+  margin-right: -15px;
 }
 
 .list-block {

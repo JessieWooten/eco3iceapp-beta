@@ -43,7 +43,7 @@
                 </div>
               </div>
             </li>
-            <li v-else class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
+            <li v-else class="accordion-item" @setNewName="close(event)" ><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   Rename Eco Unit
@@ -55,10 +55,12 @@
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div>
                       <input id="rename"  class="menu-rename-input" type="text"
-                        v-model="newUnitName"
+                        v-model="newUnitName" v-on:keydown.enter="setName()"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"/>
                     </div>
-                    <button :disabled="nameTooShort || nameIsSame || unitNotSelected" class="menu-rename-button" type="button" name="button" @click="setName()">
+                    <button :disabled="nameTooShort || nameIsSame || unitNotSelected" class="menu-rename-button"
+                      type="button" name="button" @click="setName()"
+                      >
                       <i class="f7-icons" style="padding: 0 3px;">add</i>
                     </button>
                   </div>
@@ -74,7 +76,7 @@
                 </div>
               </div>
             </li>
-            <li v-else class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" @click="focus('capacity')">
+            <li v-else class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" >
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   Set Ice Machine Capacity
@@ -86,7 +88,7 @@
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div class="">
                       <input id="capacity" class="menu-capacity-input" type="text"
-                        v-model="capacityValue"
+                        v-model="capacityValue" v-on:keydown.enter="setCapacity()" @matchNames="matchNames()"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"
                         />
                         <span v-if="this.imperial" style="margin: 0 5px;"> lbs</span>
@@ -163,6 +165,9 @@ export default {
     }
   },
   methods: {
+    close: function(event){
+      event.currentTarget.accordionClose()
+    },
     openConnectPrompt: function() {
       this.$emit('openConnectPrompt');
     },
@@ -178,12 +183,13 @@ export default {
     matchNames: function(id) {
       if(this.selectedUnitIndex != -1){
         this.newUnitName = this.unitName;
-        this.focus(id)
       }
     },
-    focus: function(id) {
-      document.getElementById(id).focus()
-    },
+    // focus: function(id) {
+    //   setTimeout(function(){
+    //   document.getElementById(id).focus()
+    // }, 500)
+    // },
     setName: function() {
       this.$emit('setNewName', this.newUnitName);
       this.clearInputs();

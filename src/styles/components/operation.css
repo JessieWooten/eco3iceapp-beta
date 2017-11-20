@@ -222,3 +222,55 @@ width: 100%;
   }
 
 }
+
+@media (min-height: 800px) {
+  .avg-consumption__title {
+    padding-left: 30%;
+  }
+}
+
+@media (min-height: 1000px) {
+  .consumption-text {
+    font-size: 6em;
+  }
+
+  .status-icon-inline {
+    height: 55px;
+  }
+
+  .health-text {
+    font-size: 2.5em;
+  }
+
+  .health-icon {
+    width: 45px;
+  }
+
+  .status-text {
+      font-size: 2.8em;
+  }
+
+  .status-icon {
+    height: 65px;
+  }
+
+  .avg-consumption-number {
+    font-size: 3.7em;
+  }
+
+  .avg-consumption__title {
+    font-size: 1.3em;
+  }
+
+  .avg-consumption-icon {
+    height: 40px;
+  }
+
+  .status-text-ok {
+    font-size: 6em;
+  }
+
+  .box-title {
+    font-size: 1.7em;
+  }
+}

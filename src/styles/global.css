@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,.6);
-  z-index: 2000;
+  z-index: 6000;
   visibility: visible;
   opacity: 1;
   -webkit-transition-duration: .4s;
@@ -25,7 +25,7 @@
 
 .e3i-overflow {
   height: 85%;
-  overflow: scroll;
+  /*overflow: scroll;*/
 }
 
 /*Title and Text Styling*/
@@ -165,7 +165,7 @@
 }
 
 .menu-capacity-input {
-  width: 155px !important;
+  width: 145px !important;
   color: #5a5a5a !important;
   font-weight: 300 !important;
   background-color: #fff !important;
@@ -215,6 +215,14 @@
   display: block;
   font-size: 25px;
   padding: 40px 20px;
+}
+
+.wifiConnect-title {
+  color: #5a5a5a;
+  text-align: center;
+  display: block;
+  font-size: 25px;
+  padding: 40px 25px;
 }
 
 /* Connect Prompt Styling*/
@@ -290,5 +298,37 @@ color: #dc281e;
 
   .box-title-left {
     font-size: 1em;
+  }
+}
+
+@media (min-height: 800px) {
+  .e3i-scale-lg {
+    height: 33%;
+    background-color: #fff;
+  }
+
+  .e3i-scale-sm {
+    height: 17%;
+    background-color: #fff;
+  }
+}
+
+@media (min-height: 1000px) {
+  .unit-name{
+    font-size: 2.5em;
+  }
+  .unit-version {
+    font-size: 1.3em;
+  }
+  .popup-alert {
+    font-size: 2em;
+  }
+
+  .popup-alert-saved {
+    font-size: 2.7em
+  }
+
+  .popup-alert-saved__reset {
+    font-size: 2.5em;
   }
 }

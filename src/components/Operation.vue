@@ -1,7 +1,7 @@
 <template lang="html">
-  <div>
+  <div style="height: 80vh">
     <h3 class="page-title">operation</h3>
-    <div class="content-block inset">
+    <div class="content-block inset flex e3i-scale-lg">
       <div class="content-block-inner">
         <div class="e3i-content-lg">
           <div class="status-container">
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div class="content-block inset" >
+    <div class="content-block inset flex e3i-scale-sm" >
       <div class="content-block-inner">
         <div class="e3i-content-sm">
           <div class="health-container">
@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="content-block inset" >
+    <div class="content-block inset flex e3i-scale-sm" >
       <div class="content-block-inner">
         <div class="e3i-content-sm">
           <div class="health-container">
@@ -120,6 +120,11 @@
         </div>
       </div>
     </div>
+    <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
+      <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
+        <i class="f7-icons disconnect-icon">close</i>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -129,7 +134,8 @@ export default {
     status: String,
     health: String,
     waterUsage: String,
-    imperial: Boolean
+    imperial: Boolean,
+    selectedUnitIndex: Number
   },
   methods:{
     convertToLiters: function(gals) {
@@ -137,6 +143,9 @@ export default {
         const liter = 0.264172052;
         return Math.round(gals / liter);
       }
+    },
+    toggleDisconnectPrompt: function() {
+      this.$emit('toggleDisconnectPrompt')
     }
   },
   data: function() {

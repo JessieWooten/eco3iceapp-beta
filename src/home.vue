@@ -43,6 +43,8 @@
           :popupSaveOpened="popupSaveOpened"
           :popupWasReset="popupWasReset"
           :popupResetOpened="popupResetOpened"
+          :connectToWifi="connectToWifi"
+          @closeWifiPrompt="toggleWifiPrompt"
         ></popup>
         <!--Page start -->
         <f7-pages id="pages">
@@ -69,12 +71,9 @@
                   :health="cleanUpInput(health)"
                   :waterUsage="waterUsage"
                   :imperial="imperial"
+                  :selectedUnitIndex="selectedUnitIndex"
+                  @toggleDisconnectPrompt="toggleDisconnectPrompt()"
                 ></operation>
-                <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
-                  <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
-                    <i class="f7-icons disconnect-icon">close</i>
-                  </div>
-                </div>
               </f7-swiper-slide>
               <f7-swiper-slide>
                 <consumption
@@ -82,12 +81,9 @@
                   :averageDuty="averageDuty"
                   :averageConsumption="averageConsumption"
                   :imperial="imperial"
+                  :selectedUnitIndex="selectedUnitIndex"
+                  @toggleDisconnectPrompt="toggleDisconnectPrompt()"
                 ></consumption>
-                <div class= "disconnect-wrapper" v-if="selectedUnitIndex != -1">
-                  <div class="disconnect-launcher" @click="toggleDisconnectPrompt()">
-                    <i class="f7-icons disconnect-icon">close</i>
-                  </div>
-                </div>
               </f7-swiper-slide>
             </f7-swiper>
           <!-- main content end -->
@@ -139,7 +135,7 @@ export default {
 			try { window.prDone(); } catch(e) { };
 		}else if(str.indexOf('new_device') > -1){
       //remove filter after ble is obsolete
-      this.unitList = JSON.parse(str.substring(11)).filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
+      this.unitList = JSON.parse(str.substring(11))//.filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
     }else if (str.indexOf("eset_saved") > -1) {
       setTimeout(function() { window.app.sendCommand("dr");},500);
       this.popupResetOpened = false;
@@ -154,6 +150,7 @@ export default {
         if (this.readyState == 4 && this.status == 200) {
           var device = JSON.parse(this.responseText);
           self.unitName = device.name;
+          this.$emit("matchNames")
           self.nameIsLoading = false;
           self.popupOpened = false;
           self.popupSaveOpened = true;
@@ -197,6 +194,9 @@ export default {
       },100);
       window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
     },
+    toggleWifiPrompt:function() {
+      this.connectToWifi = !this.connectToWifi
+    },
     togglePanel: function() {
       this.panelOpened = !this.panelOpened;
     },
@@ -232,7 +232,7 @@ export default {
     	window.clearTimeout(window.tmptimeout);
     	var device = this.unitList[index];
     	this.unitName = device.name;
-      this.mac = device.ip;
+      this.mac = device.mac;
       this.selectedUnitIndex = index;
       this.displayIsLoading()
     	window.app.connect(device.mac);
@@ -304,6 +304,7 @@ export default {
       popupWasReset:false,
       popupSaveOpened: false,
       nameIsLoading: false,
+      connectToWifi: false,
       imperial: true,
       unitName: '- - -',
       mac: '',

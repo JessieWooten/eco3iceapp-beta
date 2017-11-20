@@ -48,6 +48,13 @@
         </f7-card>
       </div>
     </f7-popup>
+    <!-- <div :hidden="!connectToWifi" class="e3i-prompt-overlay" @click="closeWifiPrompt"></div> -->
+    <f7-actions animated="true" :opened="connectToWifi">
+      <f7-actions-group>
+        <f7-actions-label class="wifiConnect-title">Please Connect to wifi network</f7-actions-label>
+        <f7-actions-button style="width: 100%" @click="closeWifiPrompt()">ok</f7-actions-button>
+      </f7-actions-group>
+    </f7-actions>
   </div>
 </template>
 
@@ -57,7 +64,13 @@ export default {
     popupOpened: Boolean,
     popupSaveOpened: Boolean,
     popupWasReset: Boolean,
-    popupResetOpened: Boolean
+    popupResetOpened: Boolean,
+    connectToWifi: Boolean
+  },
+  methods: {
+    closeWifiPrompt: function() {
+      this.$emit('closeWifiPrompt')
+    }
   }
 }
 </script>
