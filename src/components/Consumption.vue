@@ -23,10 +23,10 @@
                 <p class="consumption-text e3i-success">{{ consumption }}</p>
                 <img class="status-icon-inline" src="static/images/consumption/lbs.png">
               </div>
-              <!--KGS-->
+              <!--KG-->
               <div v-else>
-                <p class="consumption-text e3i-success">{{ convertToKgs(consumption) }}</p>
-                <img class="status-icon-inline" src="static/images/consumption/kgs.png">
+                <p class="consumption-text e3i-success">{{ convertToKg(consumption) }}</p>
+                <img class="status-icon-inline" src="static/images/consumption/kg.png">
               </div>
             </div>
           </div>
@@ -69,10 +69,10 @@
                   <img class="avg-consumption-icon" src="static/images/consumption/lbs.png">
                   <p class="avg-consumption-display__daily">daily</p>
                 </div>
-                <!--KGS-->
+                <!--KG-->
                 <div v-else>
-                  <span class="avg-consumption-number e3i-success">{{ convertToKgs(averageConsumption) }}</span>
-                  <img class="avg-consumption-icon" src="static/images/consumption/kgs.png">
+                  <span class="avg-consumption-number e3i-success">{{ convertToKg(averageConsumption) }}</span>
+                  <img class="avg-consumption-icon" src="static/images/consumption/kg.png">
                   <p class="avg-consumption-display__daily">daily</p>
                 </div>
               </div>
@@ -137,10 +137,10 @@ export default {
     selectedUnitIndex: Number
   },
   methods: {
-    convertToKgs: function(lbs) {
+    convertToKg: function(lbs) {
       if(!isNaN(Number(lbs))){
-        const kgs = 0.45359237;
-        return Math.round(lbs * kgs)
+        const kg = 0.45359237;
+        return Math.round(lbs * kg)
       }
     },
     toggleDisconnectPrompt: function() {

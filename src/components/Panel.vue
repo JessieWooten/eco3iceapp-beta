@@ -43,7 +43,7 @@
                 </div>
               </div>
             </li>
-            <li v-else class="accordion-item" @setNewName="close(event)" ><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
+            <li v-else class="accordion-item" @setNewName="close(event)" @matchNamesCallback="matchNames()" ><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   Rename Eco Unit
@@ -92,7 +92,7 @@
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"
                         />
                         <span v-if="this.imperial" style="margin: 0 5px;"> lbs</span>
-                        <span v-else style="margin: 0 5px;"> kgs</span>
+                        <span v-else style="margin: 0 5px;"> kg</span>
                     </div>
                     <button :disabled="!isWholeNumber || Number(this.capacityValue) === 0  || unitNotSelected"
                       :class="{'menu-rename-button':true, 'disabled':!isWholeNumber }"
@@ -116,12 +116,12 @@
               <div class="accordion-item-content">
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
-                    <p :class="{'menu-measurement': true, disabled: !this.imperial}">Lbs</p>
+                    <p :class="{'menu-measurement': true, disabled: !this.imperial}">imperial</p>
                     <f7-input id="switch"
                     type="switch"
                     @click="switchMeasurement"
                     style="width:auto"></f7-input>
-                    <p :class="{'menu-measurement': true, disabled: this.imperial}">Kgs</p>
+                    <p :class="{'menu-measurement': true, disabled: this.imperial}">metric</p>
                   </div>
                 </div>
               </div>
@@ -205,7 +205,7 @@ export default {
         this.capacityValue = 0;
       }else{
         let toLbs = Math.round(this.capacityValue * 2.20462262185);
-        console.log(this.capacityValue + ' kgs converts to ' + toLbs + ' lbs')
+        console.log(this.capacityValue + ' kg converts to ' + toLbs + ' lbs')
         this.$emit('setCapacity', toLbs);
         this.capacityValue = 0;
       }
