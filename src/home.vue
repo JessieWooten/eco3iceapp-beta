@@ -38,6 +38,13 @@
           @disconnectClosed="toggleDisconnectPrompt()"
           @disconnectUnit="disconnectUnit()"
         ></disconnect-prompt>
+        <!-- Order parts prompt -->
+        <OrderParts
+        :orderPartsOpened="orderPartsOpened"
+        @orderPromptClosed="toggleOrderPrompt"
+
+        ></OrderParts>
+        <!--Popup prompts -->
         <popup
           :popupOpened="popupOpened"
           :popupSaveOpened="popupSaveOpened"
@@ -85,6 +92,11 @@
                   @toggleDisconnectPrompt="toggleDisconnectPrompt()"
                 ></consumption>
               </f7-swiper-slide>
+              <f7-swiper-slide>
+                <page-3
+                  @OpenOrderParts="toggleOrderPrompt()"
+                ></page-3>
+              </f7-swiper-slide>
             </f7-swiper>
           <!-- main content end -->
           </f7-page>
@@ -98,10 +110,12 @@
 import Navigation from './components/Navigation.vue'
 import Operation from './components/Operation.vue'
 import Consumption from './components/Consumption.vue'
+import Page3 from './components/Page3.vue'
 import Panel from './components/Panel.vue'
 import ResetPrompt from './components/menu/Reset.vue'
 import ConnectPrompt from './components/menu/Connect.vue'
 import DisconnectPrompt from './components/menu/Disconnect.vue'
+import OrderParts from './components/menu/OrderParts.vue'
 import Popup from './components/menu/Popup.vue'
 export default {
   name: 'app',
@@ -109,10 +123,12 @@ export default {
     Navigation,
     Operation,
     Consumption,
+    Page3,
     Panel,
     ResetPrompt,
     DisconnectPrompt,
     ConnectPrompt,
+    OrderParts,
     Popup
   },
   computed: {
@@ -150,7 +166,7 @@ export default {
         if (this.readyState == 4 && this.status == 200) {
           var device = JSON.parse(this.responseText);
           self.unitName = device.name;
-          this.$emit("matchNames")
+          // this.$emit("matchNames")
           self.nameIsLoading = false;
           self.popupOpened = false;
           self.popupSaveOpened = true;
@@ -193,6 +209,9 @@ export default {
         }
       },100);
       window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
+    },
+    toggleOrderPrompt: function(prop) {
+      this.orderPartsOpened = !this.orderPartsOpened
     },
     toggleWifiPrompt:function() {
       this.connectToWifi = !this.connectToWifi
@@ -303,6 +322,7 @@ export default {
       popupResetOpened: false,
       popupWasReset:false,
       popupSaveOpened: false,
+      orderPartsOpened: false,
       nameIsLoading: false,
       connectToWifi: false,
       imperial: true,
