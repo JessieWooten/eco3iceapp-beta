@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div @actions:closed="closeWifiPrompt">
     <!--Saving to unit Popup -->
     <f7-popup id="popup" :opened="popupOpened">
       <div class="flex" style="height: 100vh">
