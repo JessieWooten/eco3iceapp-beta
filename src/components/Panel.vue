@@ -43,7 +43,7 @@
                 </div>
               </div>
             </li>
-            <li v-else class="accordion-item" @setNewName="close(event)" @matchNamesCallback="matchNames()" ><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
+            <li v-else id="rename"class="accordion-item" @setNewName="close(event)"><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   Rename Eco Unit
@@ -54,7 +54,8 @@
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div>
-                      <input id="rename"  class="menu-rename-input" type="text"
+                      <input class="menu-rename-input"
+                        type="text"  ref="rename"
                         v-model="newUnitName" v-on:keydown.enter="setName()"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"/>
                     </div>
@@ -76,7 +77,7 @@
                 </div>
               </div>
             </li>
-            <li v-else class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" >
+            <li v-else id="capacity" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" >
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   Set Ice Machine Capacity
@@ -87,8 +88,8 @@
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div class="">
-                      <input id="capacity" class="menu-capacity-input" type="text"
-                        v-model="capacityValue" v-on:keydown.enter="setCapacity()" @matchNames="matchNames()"
+                      <input class="menu-capacity-input" type="text" maxlength="5"
+                        v-model="capacityValue" v-on:keydown.enter="setCapacity()" placeholder="0"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"
                         />
                         <span v-if="this.imperial" style="margin: 0 5px;"> lbs</span>
@@ -106,7 +107,7 @@
               </div>
             </li>
             <!--Measurements Accordion -->
-            <li class="accordion-item"><a href="#" class="item-link" style="padding-left:0;">
+            <li id="measurements" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="overflow: visible;">
                   Measurements
@@ -147,7 +148,7 @@ export default {
   },
   computed:{
     unitNotSelected: function() {
-      return this.selectedUnitIndex === -1;
+      return this.selectedUnitIndex === -1 && !window.app.isConnected();
     },
     nameIsSame: function() {
       return this.unitName.trim() == this.newUnitName.trim()
@@ -185,35 +186,30 @@ export default {
         this.newUnitName = this.unitName;
       }
     },
-    // focus: function(id) {
-    //   setTimeout(function(){
-    //   document.getElementById(id).focus()
-    // }, 500)
-    // },
     setName: function() {
       this.$emit('setNewName', this.newUnitName);
       this.clearInputs();
     },
     clearInputs: function()  {
       this.newUnitName = this.unitName;
-      this.capacityValue = 0;
+      this.capacityValue = '';
     },
     setCapacity: function() {
       if (this.imperial) {
         console.log('Set Capacity: ' + this.capacityValue + ' lbs')
         this.$emit('setCapacity', this.capacityValue),
-        this.capacityValue = 0;
+        this.capacityValue = '';
       }else{
         let toLbs = Math.round(this.capacityValue * 2.20462262185);
         console.log(this.capacityValue + ' kg converts to ' + toLbs + ' lbs')
         this.$emit('setCapacity', toLbs);
-        this.capacityValue = 0;
+        this.capacityValue = '';
       }
     }
   },
   data: function() {
     return {
-      capacityValue: 0,
+      capacityValue: '',
       newUnitName: this.unitName,
       warnName: false
     }
