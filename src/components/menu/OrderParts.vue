@@ -29,7 +29,7 @@ export default {
       this.$emit('orderPromptClosed');
     },
     launchWebstore: function() {
-      window.location = 'http://www.franke.com'
+      window.location = 'order://#'
     }
   }
 }
