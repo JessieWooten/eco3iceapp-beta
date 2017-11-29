@@ -10,7 +10,7 @@
           :unitName="unitName"
           @openResetPrompt="toggleResetPrompt()"
           @openConnectPrompt="toggleConnect(), requestUnit()"
-          @closePanel="togglePanel()"
+          @closePanel="togglePanel(), closeAccordion()"
           @switchMeasurements="toggleMeasurements()"
           @setNewName="setNewName($event),togglePanel()"
           @setCapacity="setCapacity($event)"
@@ -166,10 +166,10 @@ export default {
         if (this.readyState == 4 && this.status == 200) {
           var device = JSON.parse(this.responseText);
           self.unitName = device.name;
-          // this.$emit("matchNames")
           self.nameIsLoading = false;
           self.popupOpened = false;
           self.popupSaveOpened = true;
+          self.closeAccordion()
           var that = self
           setTimeout(function(){that.popupSaveOpened = false}, 1000)
          }
@@ -209,6 +209,16 @@ export default {
         }
       },100);
       window.tmptimeout = window.setTimeout(function() { window.clearInterval(window.tmpinterval);  },10000);
+    },
+    closeAccordion: function() {
+      var self = this;
+      setTimeout(function(){
+        if(self.selectedUnitIndex != -1) {
+          window.vue.$f7.accordionClose('#rename')
+          window.vue.$f7.accordionClose('#capacity')
+        }
+        window.vue.$f7.accordionClose('#measurements')
+      },300)
     },
     toggleOrderPrompt: function(prop) {
       this.orderPartsOpened = !this.orderPartsOpened
@@ -299,7 +309,7 @@ export default {
       }
     },
     pullToRefresh: function (event, done) {
-	window.prDone = done;
+	    window.prDone = done;
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
         window.app.sendCommand("dr");
       }else{
