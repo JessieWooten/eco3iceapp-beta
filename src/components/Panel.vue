@@ -148,7 +148,7 @@ export default {
   },
   computed:{
     unitNotSelected: function() {
-      return this.selectedUnitIndex === -1 && !window.app.isConnected();
+      return this.selectedUnitIndex === -1;
     },
     nameIsSame: function() {
       return this.unitName.trim() == this.newUnitName.trim()
