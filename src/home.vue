@@ -8,12 +8,16 @@
           :selectedUnitIndex="selectedUnitIndex"
           :imperial="imperial"
           :unitName="unitName"
+          :language="language"
           @openResetPrompt="toggleResetPrompt()"
           @openConnectPrompt="toggleConnect(), requestUnit()"
           @closePanel="togglePanel(), closeAccordion()"
           @switchMeasurements="toggleMeasurements()"
           @setNewName="setNewName($event),togglePanel()"
           @setCapacity="setCapacity($event)"
+          @setLang="setLang($event)"
+          @openLog="toggleLog()"
+
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
@@ -38,6 +42,14 @@
           @disconnectClosed="toggleDisconnectPrompt()"
           @disconnectUnit="disconnectUnit()"
         ></disconnect-prompt>
+        <!-- Log View -->
+        <log
+          :log="log"
+          :unitName="unitName"
+          :isLogOpened="logOpened"
+          @logClosed="toggleLog"
+        >
+        </log>
         <!-- Order parts prompt -->
         <OrderParts
         :orderPartsOpened="orderPartsOpened"
@@ -115,6 +127,7 @@ import Panel from './components/Panel.vue'
 import ResetPrompt from './components/menu/Reset.vue'
 import ConnectPrompt from './components/menu/Connect.vue'
 import DisconnectPrompt from './components/menu/Disconnect.vue'
+import Log from './components/menu/Log.vue'
 import OrderParts from './components/menu/OrderParts.vue'
 import Popup from './components/menu/Popup.vue'
 export default {
@@ -128,6 +141,7 @@ export default {
     ResetPrompt,
     DisconnectPrompt,
     ConnectPrompt,
+    Log,
     OrderParts,
     Popup
   },
@@ -182,9 +196,37 @@ export default {
       this.popupSaveOpened = true;
       var self = this;
       setTimeout(function(){self.popupSaveOpened = false}, 1000)
+    } else if(str.indexOf('log_ready') > -1) {
+      var newdata = str.substring(10);
+      for(var a =0;a<newdata.length;a++) {
+        if(newdata[a] == '$') {
+            this.incomingLog = "";
+        } else if(newdata[a] == '~') {
+            //finished
+            console.log('done');
+            //console.log(this.incomingLog.split('\n'));
+            var tmplist = this.incomingLog.split('\n');
+            for(var l =0;l< tmplist.length;l++) {
+              if(tmplist.length > 0) {
+                this.log.push(tmplist[l]);
+              }
+            }
+            tmplist= null;
+
+            break;
+        } else {
+          this.incomingLog += newdata[a];
+        }
+      }
+
+
+    }else if(str.indexOf('local_logs') != -1){
+      this.localLogs = str.substring(11);
+      alert('local logs: \n' + this.localLogs )
     }else{
-      console.log("didint fit dataUpdate case: " + str)
+      console.log("ERROR - didnt fit dataUpdate case: " + str)
     }
+
 	},
     requestUnit: function() {
       var dcount = 0;
@@ -217,6 +259,7 @@ export default {
           window.vue.$f7.accordionClose('#rename')
           window.vue.$f7.accordionClose('#capacity')
         }
+        window.vue.$f7.accordionClose('#language')
         window.vue.$f7.accordionClose('#measurements')
       },300)
     },
@@ -231,6 +274,9 @@ export default {
     },
     toggleResetPrompt: function() {
       this.resetOpened = !this.resetOpened;
+    },
+    toggleLog: function() {
+      this.logOpened = !this.logOpened;
     },
     toggleConnect: function() {
       this.connectOpened = !this.connectOpened;
@@ -271,7 +317,6 @@ export default {
     },
     setNewName: function (name) {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
-        //console.log('window.app.sendCommand(\'rename:' + name + '\')')
         window.app.sendCommand('rename:' + name);
         this.nameIsLoading = true;
         this.popupOpened = true;
@@ -282,9 +327,10 @@ export default {
         window.app.sendCommand('capacity:' + capacity)
         console.log("window.app.sendCommand('capacity:' + capacity)")
         this.popupOpened = true;
-        //self = this
-        // setTimeout(function(){self.popupOpened = false}, 1000)
       }
+    },
+    setLang: function(lang) {
+      alert(lang);
     },
     resetUnit: function() {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
@@ -335,7 +381,9 @@ export default {
       orderPartsOpened: false,
       nameIsLoading: false,
       connectToWifi: false,
+      logOpened: false,
       imperial: true,
+      language: 'en',
       unitName: '- - -',
       mac: '',
       version: '',
@@ -346,6 +394,9 @@ export default {
       averageConsumption: '---',
       averageDuty:'---',
       selectedUnitIndex: -1,
+      incomingLog: '',
+      log: [],
+      localLogs:[],
       unitList: []
     }
   }
