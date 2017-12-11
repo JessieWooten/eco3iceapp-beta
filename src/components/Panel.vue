@@ -55,7 +55,7 @@
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div>
                       <input class="menu-rename-input"
-                        type="text"  ref="rename"
+                        type="text"  ref="rename" maxlength="25"
                         v-model="newUnitName" v-on:keydown.enter="setName()"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"/>
                     </div>
@@ -87,7 +87,7 @@
               <div class="accordion-item-content">
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
-                    <div class="">
+                    <div>
                       <input class="menu-capacity-input" type="text" maxlength="5"
                         v-model="capacityValue" v-on:keydown.enter="setCapacity()" placeholder="0"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"
@@ -102,6 +102,31 @@
                     >
                       <i class="f7-icons" style="padding: 0 3px;">add</i>
                     </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <!--Language Accordion -->
+            <li id="language" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;">
+              <div class="item-inner" style="padding-right:0; background: none;">
+                <div class="menu-item item-title" style="width:100%;">
+                  Language
+                  <i class="f7-icons menu-icon" style="font-size:17px; float: right;">world</i>
+                </div>
+              </div></a>
+              <div class="accordion-item-content">
+                <div class="content-block" style="padding: 0">
+                  <div class="menu-drop-down flex" style="justify-content: flex-start;">
+                    <div class="flex" style="width: 100%;">
+                    <select v-model="selectedLang"  class="menu-lang-select">
+                      <option disabled value="">{{currentLanguage}}</option>
+                      <option v-for="lang in allLanguages" :value="lang">{{lang}}</option>
+                    </select>
+                    <i class="f7-icons menu-icon" :disabled="this.selectedLang === ''"
+                    style="font-size:17px; padding: 10px 15px; margin-left: 20px;"
+                    @click="setLang"
+                    >chevron_right</i>
+                  </div>
                   </div>
                 </div>
               </div>
@@ -129,6 +154,22 @@
             </li>
           </div>
         </f7-list-item>
+        <f7-list-item
+          v-if="unitNotSelected"
+          title="View Log"
+          class="menu-item disabled"
+        >
+          <i class="f7-icons menu-icon-reset disabled" style="font-size:17px;">document_text</i>
+        </f7-list-item>
+        <!--Log Prompt Enabled -->
+        <f7-list-item
+          v-else
+          title="View Log"
+          class="menu-item"
+          @click="openLog"
+        >
+          <i class="f7-icons menu-icon" style="font-size:17px;">document_text</i>
+        </f7-list-item>
       </f7-list>
       <p :hidden="!nameTooShort" class="e3i-fail" style="font-size: 9px; margin-left: 15px">name should be at least 3 characters long</p>
       <p :hidden="isWholeNumber" class="e3i-fail" style="font-size: 9px; margin-left: 15px">capacity should be a whole number</p>
@@ -144,7 +185,8 @@ export default {
     isResetOpened: Boolean,
     selectedUnitIndex: Number,
     imperial: Boolean,
-    unitName: String
+    unitName: String,
+    language: String
   },
   computed:{
     unitNotSelected: function() {
@@ -158,10 +200,28 @@ export default {
     },
     isWholeNumber: function() {
       let input = Number(this.capacityValue)
-      if(!isNaN(input)){
-        return (typeof input == 'number' && input%1 == 0);
-      }else{
+      if(isNaN(input)){
+        return false
+      }else if (this.capacityValue.indexOf('.') != -1) {
         return false;
+      }else{
+        return (typeof input == 'number' && input%1 == 0);
+      }
+    },
+    currentLanguage: function() {
+      switch (this.language) {
+        case 'en':
+          return "English"
+          break;
+
+        case "es":
+            return "Español"
+            break;
+
+        default:
+        return "Language"
+
+
       }
     }
   },
@@ -174,6 +234,10 @@ export default {
     },
     openResetPrompt: function() {
       this.$emit('openResetPrompt');
+    },
+    openLog: function() {
+      this.$emit('openLog');
+      window.app.sendCommand("lr")
     },
     closePanel: function() {
       this.$emit('closePanel')
@@ -189,6 +253,10 @@ export default {
     setName: function() {
       this.$emit('setNewName', this.newUnitName);
       this.clearInputs();
+    },
+    setLang: function() {
+      this.$emit('setLang', this.selectedLang);
+      this.closePanel;
     },
     clearInputs: function()  {
       this.newUnitName = this.unitName;
@@ -211,7 +279,9 @@ export default {
     return {
       capacityValue: '',
       newUnitName: this.unitName,
-      warnName: false
+      warnName: false,
+      selectedLang: '',
+      allLanguages: ["English", "Espanol", "French"]
     }
   }
 }
