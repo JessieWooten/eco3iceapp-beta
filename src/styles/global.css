@@ -9,6 +9,19 @@
   background-color: #fff;
 }
 
+.delete-prompt {
+  z-index: 13510 !important;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  -webkit-transform: translate3d(0,100%,0);
+  transform: translate3d(0,100%,0);
+  max-height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .e3i-prompt-overlay {
   position: absolute;
   left: 0;
@@ -17,6 +30,20 @@
   height: 100%;
   background: rgba(0,0,0,.6);
   z-index: 6000;
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition-duration: .4s;
+  transition-duration: .4s;
+}
+
+.e3i-prompt-overlay-delete {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,.6);
+  z-index: 13500;
   visibility: visible;
   opacity: 1;
   -webkit-transition-duration: .4s;
@@ -265,10 +292,12 @@
 .log-title-wrapper{
   position: absolute;
   left: 10%;
+  word-wrap: break-word;
+  max-width: 60%;
 }
 
 .log-title {
-  font-size: 17px;
+  font-size: 14px;
   padding: 10px 0;
   font-weight: 300;
 }
@@ -276,7 +305,7 @@
 .log-data-display {
   height: 80%;
   overflow: scroll;
-  border-bottom: 1px solid #b6b2b2
+  border-bottom: 1px solid #c7c8cc;
 
 }
 
@@ -290,6 +319,7 @@
 .log-share-wrapper{
   position: absolute !important;
   right: 7%;
+  width: 20%;
 }
 
 .log-email-icon {
@@ -301,6 +331,18 @@
 .log-download-icon {
   font-size: 1.5em;
   padding: 10px 15px;
+}
+
+.local-log-list-wrapper {
+  max-height: 63vh;
+}
+
+.local-log-list{
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.local-log-delete{
+  background-color: #dc281e !important;
 }
 
 /* Loading bar / Eco Unit seaching styling */
@@ -374,6 +416,10 @@ color: #dc281e;
   .log-data-display{
     height: 77.5%;
   }
+
+  .local-log-list-wrapper {
+    max-height: 57vh;
+  }
 }
 
 @media (min-height: 800px) {
@@ -395,6 +441,10 @@ color: #dc281e;
 
   .log-data{
     padding-right: 50px;
+  }
+
+  .local-log-list-wrapper {
+    max-height: 68vh;
   }
 }
 
@@ -426,5 +476,9 @@ color: #dc281e;
   }
   .log-data-display{
     height: 87%;
+  }
+
+  .local-log-list-wrapper {
+    max-height: 74vh;
   }
 }
