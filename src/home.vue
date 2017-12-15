@@ -45,9 +45,15 @@
         <!-- Log View -->
         <log
           :log="log"
+          :localLogs="localLogs"
+          :localLogData="localLogData"
           :unitName="unitName"
+          :selectedUnitIndex="selectedUnitIndex"
           :isLogOpened="logOpened"
+          :logCurrentlySaving="logCurrentlySaving"
+          :logWasSaved="logWasSaved"
           @logClosed="toggleLog"
+          @logCurrentlySaving="logSavingToggle"
         >
         </log>
         <!-- Order parts prompt -->
@@ -149,8 +155,10 @@ export default {
   },
   methods: {
 	dataUpdate: function(str) {
+
 		if(str == "connected") {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
+
 		}else if(str.indexOf('data_ready') > -1) {
 			try {
 				var sdata = JSON.parse(str.substring(11));
@@ -163,15 +171,16 @@ export default {
 			  this.version = sdata.version ? sdata.version : '';
 			} catch(e) { console.log(e,"error"); }
 			try { window.prDone(); } catch(e) { };
+
 		}else if(str.indexOf('new_device') > -1){
-      //remove filter after ble is obsolete
-      this.unitList = JSON.parse(str.substring(11))//.filter(unit => unit.name.toLowerCase().indexOf('ecoice') != -1)
+      this.unitList = JSON.parse(str.substring(11))
     }else if (str.indexOf("eset_saved") > -1) {
       setTimeout(function() { window.app.sendCommand("dr");},500);
       this.popupResetOpened = false;
       this.popupWasReset = true;
       var self = this;
       setTimeout(function(){self.popupWasReset = false}, 1000)
+
     }else if(str.indexOf('name_saved') > -1){
       var xhttp = new XMLHttpRequest();
       var self = this;
@@ -190,12 +199,14 @@ export default {
       };
       xhttp.open("GET", request, true);
       xhttp.send();
+
     }else if(str.indexOf('capacity_saved')> -1){
       this.popupOpened = false;
       console.log('capacity saved.')
       this.popupSaveOpened = true;
       var self = this;
       setTimeout(function(){self.popupSaveOpened = false}, 1000)
+
     } else if(str.indexOf('log_ready') > -1) {
       var newdata = str.substring(10);
       for(var a =0;a<newdata.length;a++) {
@@ -214,15 +225,38 @@ export default {
             tmplist= null;
 
             break;
-        } else {
+        }else {
           this.incomingLog += newdata[a];
         }
       }
 
-
     }else if(str.indexOf('local_logs') != -1){
-      this.localLogs = str.substring(11);
-      alert('local logs: \n' + this.localLogs )
+      var arr= JSON.parse(str.substring(11));
+      //loops through array and if directory is empty, deletes that directory
+      arr.map(function(dir) {
+        if(dir[1].length === 0){
+          window.app.deleteFile(encodeURIComponent(dir[0]))
+          console.log(dir[0] + " was empty. Deleting...")
+        }
+      });
+      this.localLogs = arr;
+      //console.log( 'The local logs are: ', this.localLogs)
+
+    }else if(str.indexOf('loc_log_file_data') != -1){
+      var contents = decodeURIComponent(str.substring(18));
+      var arr = contents.split('\n');
+      console.log("local log file: ", arr)
+      this.localLogData = arr;
+
+    }else if(str.indexOf('log_saved') != -1){
+      window.app.reqLocalLogs()
+      this.logWasSaved = true;
+      var self = this;
+      setTimeout(function(){self.logWasSaved = false; self.logCurrentlySaving = false;}, 1000)
+
+    }else if(str.indexOf('log_deleted') != -1){
+      window.app.reqLocalLogs();
+
     }else{
       console.log("ERROR - didnt fit dataUpdate case: " + str)
     }
@@ -291,6 +325,9 @@ export default {
     toggleMeasurements: function() {
       this.imperial = !this.imperial;
     },
+    logSavingToggle: function() {
+      this.logCurrentlySaving = true;
+    },
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
     },
@@ -317,7 +354,7 @@ export default {
     },
     setNewName: function (name) {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
-        window.app.sendCommand('rename:' + name);
+        window.app.sendCommand('rename:' + encodeURIComponent(name));
         this.nameIsLoading = true;
         this.popupOpened = true;
       }
@@ -383,6 +420,8 @@ export default {
       connectToWifi: false,
       logOpened: false,
       imperial: true,
+      logCurrentlySaving: false,
+      logWasSaved: false,
       language: 'en',
       unitName: '- - -',
       mac: '',
@@ -396,7 +435,9 @@ export default {
       selectedUnitIndex: -1,
       incomingLog: '',
       log: [],
-      localLogs:[],
+      localLogs: [],
+      localFiles: [],
+      localLogData:[],
       unitList: []
     }
   }
