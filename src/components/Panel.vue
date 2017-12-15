@@ -55,11 +55,11 @@
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div>
                       <input class="menu-rename-input"
-                        type="text"  ref="rename" maxlength="25"
+                        type="text"  ref="rename" maxlength="20"
                         v-model="newUnitName" v-on:keydown.enter="setName()"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"/>
                     </div>
-                    <button :disabled="nameTooShort || nameIsSame || unitNotSelected" class="menu-rename-button"
+                    <button :disabled="nameTooShort || nameIsSame || unitNotSelected || hasForbiddenChars" class="menu-rename-button"
                       type="button" name="button" @click="setName()"
                       >
                       <i class="f7-icons" style="padding: 0 3px;">add</i>
@@ -154,16 +154,8 @@
             </li>
           </div>
         </f7-list-item>
-        <f7-list-item
-          v-if="unitNotSelected"
-          title="View Log"
-          class="menu-item disabled"
-        >
-          <i class="f7-icons menu-icon-reset disabled" style="font-size:17px;">document_text</i>
-        </f7-list-item>
         <!--Log Prompt Enabled -->
         <f7-list-item
-          v-else
           title="View Log"
           class="menu-item"
           @click="openLog"
@@ -173,6 +165,7 @@
       </f7-list>
       <p :hidden="!nameTooShort" class="e3i-fail" style="font-size: 9px; margin-left: 15px">name should be at least 3 characters long</p>
       <p :hidden="isWholeNumber" class="e3i-fail" style="font-size: 9px; margin-left: 15px">capacity should be a whole number</p>
+      <p :hidden="!hasForbiddenChars" class="e3i-fail" style="font-size: 9px; margin-left: 15px">name contains forbidden characters</p>
     </f7-panel>
   </div>
 </template>
@@ -197,6 +190,18 @@ export default {
     },
     nameTooShort: function() {
       return this.newUnitName.length < 3
+    },
+    hasForbiddenChars: function() {
+      var letters = /^[0-9a-zA-Z\-_ ]+$/;
+    if(this.newUnitName === ''){
+      return false;
+    }else if (letters.test(this.newUnitName)) {
+      // alert('accepted');
+      return false;
+    } else {
+      //alert('Please input alphanumeric characters only');
+      return true;
+    }
     },
     isWholeNumber: function() {
       let input = Number(this.capacityValue)
@@ -237,7 +242,8 @@ export default {
     },
     openLog: function() {
       this.$emit('openLog');
-      window.app.sendCommand("lr")
+      window.app.reqLocalLogs();
+
     },
     closePanel: function() {
       this.$emit('closePanel')
