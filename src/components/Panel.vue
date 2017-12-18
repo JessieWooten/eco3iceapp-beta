@@ -39,16 +39,16 @@
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title disabled" style="width:100%;">
                   {{$t("Rename Eco Unit")}}
-                  <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
                 </div>
+                <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
               </div>
             </li>
             <li v-else id="rename"class="accordion-item" @setNewName="close(event)"><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   {{$t("Rename Eco Unit")}}
-                  <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
                 </div>
+                <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
               </div></a>
               <div class="accordion-item-content">
                 <div class="content-block">
@@ -73,16 +73,16 @@
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title disabled" style="width:100%;">
                   {{$t("Set Ice Machine Capacity")}}
-                  <i class="f7-icons menu-icon" style="font-size:19px; float: right;">box</i>
                 </div>
+                <i class="f7-icons menu-icon" style="font-size:19px; float: right;">box</i>
               </div>
             </li>
             <li v-else id="capacity" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" >
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   {{$t("Set Ice Machine Capacity")}}
-                  <i class="f7-icons menu-icon" style="font-size:19px; float: right;">box</i>
                 </div>
+                <i class="f7-icons menu-icon" style="font-size:19px; float: right;">box</i>
               </div></a>
               <div class="accordion-item-content">
                 <div class="content-block">
@@ -111,8 +111,9 @@
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
                   {{$t("Language")}}
-                  <i class="f7-icons menu-icon" style="font-size:17px; float: right;">world</i>
+
                 </div>
+                <i class="f7-icons menu-icon" style="font-size:17px; float: right;">world</i>
               </div></a>
               <div class="accordion-item-content">
                 <div class="content-block" style="padding: 0">
@@ -129,8 +130,8 @@
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="overflow: visible;">
                   {{$t("Measurements")}}
-                  <img src="static/images/ruler.png" class="menu-icon-img">
                 </div>
+                  <img src="static/images/ruler.png" class="menu-icon-img">
               </div></a>
               <div class="accordion-item-content">
                 <div class="content-block">
