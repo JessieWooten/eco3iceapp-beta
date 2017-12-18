@@ -4,7 +4,7 @@
     <div v-if="isLocalLog">
       <div v-if="localLogIsEmpty" class="flex" >
         <div>
-          <p class="e3i-gray-light">loading...</p>
+          <p class="e3i-gray-light">{{$t("loading...")}}</p>
           <div class="flex">
             <div class="preloader preloader-gray" style="width: 25px; height: 25px;"></div>
           </div>
@@ -21,7 +21,7 @@
     <div v-else>
       <div v-if="logIsEmpty" class="flex" >
         <div>
-          <p class="e3i-gray-light">loading...</p>
+          <p class="e3i-gray-light">{{$t("loading...")}}</p>
           <div class="flex">
             <div class="preloader preloader-gray" style="width: 25px; height: 25px;"></div>
           </div>

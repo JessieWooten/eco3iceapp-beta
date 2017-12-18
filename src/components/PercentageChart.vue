@@ -11,7 +11,7 @@
         <g class="circle-chart__info">
           <text v-if="averageDuty === '---'" class="circle-chart__percent" x="50%" y="40%" alignment-baseline="central" text-anchor="middle" font-size="18" fill="#b6b2b2">---</text>
           <text v-else class="circle-chart__percent" x="50%" y="40%" alignment-baseline="central" text-anchor="middle" font-size="18" fill="#4ee038">{{ averageDuty }}%</text>
-          <text class="circle-chart__subline" x="50%" y="60%" alignment-baseline="central" text-anchor="middle" font-size="18" font-weight="300" fill="#b6b2b2">daily</text>
+          <text class="circle-chart__subline" x="50%" y="60%" alignment-baseline="central" text-anchor="middle" font-size="18" font-weight="300" fill="#b6b2b2">{{$t("daily")}}</text>
         </g>
       </svg>
   </section>

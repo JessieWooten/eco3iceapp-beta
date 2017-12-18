@@ -1,6 +1,6 @@
 <template lang="html">
   <div style="height: 80vh">
-    <h3 class="page-title">consumption</h3>
+    <h3 class="page-title">{{$t("consumption")}}</h3>
     <!-- Daily Consumption Block Start -->
     <div class="content-block inset flex e3i-scale-lg">
       <div class="content-block-inner">
@@ -31,7 +31,7 @@
             </div>
           </div>
           <div class="status-title-wrapper">
-            <span class="box-title">daily consumption</span>
+            <span class="box-title">{{$t("daily consumption")}}</span>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
             <div class="">
               <div class="box-title-left">
                 <div>
-                  <p class="avg-consumption__title">monthly </br>average </br>consumption</p>
+                  <p class="avg-consumption__title" v-html="$t('monthly average consumption')"></p>
                 </div>
               </div>
             </div>
@@ -67,13 +67,13 @@
                 <div v-if="this.imperial">
                   <span class="avg-consumption-number e3i-success">{{ averageConsumption }}</span>
                   <img class="avg-consumption-icon" src="static/images/consumption/lbs.png">
-                  <p class="avg-consumption-display__daily">daily</p>
+                  <p class="avg-consumption-display__daily">{{$t("daily")}}</p>
                 </div>
                 <!--KG-->
                 <div v-else>
                   <span class="avg-consumption-number e3i-success">{{ convertToKg(averageConsumption) }}</span>
                   <img class="avg-consumption-icon" src="static/images/consumption/kg.png">
-                  <p class="avg-consumption-display__daily">daily</p>
+                  <p class="avg-consumption-display__daily">{{$t("daily")}}</p>
                 </div>
               </div>
             </div>
@@ -89,7 +89,7 @@
             <div class="">
               <div class="box-title-left">
                 <div>
-                  <p class="avg-consumption__title">monthly average </br>duty cycle</p>
+                  <p class="avg-consumption__title" v-html="$t('monthly average duty cycle')"></p>
                 </div>
               </div>
             </div>
@@ -107,8 +107,6 @@
                 <PercentageChart
                   :averageDuty="averageDuty"
                 ></PercentageChart>
-                <!-- <span class="avg-consumption-number e3i-success">{{ averageDuty }}</span> -->
-
               </div>
             </div>
           </div>

@@ -5,7 +5,7 @@
       <div class="flex" style="height: 100vh">
         <f7-card class="flex" style="width: 80%; text-align: center">
           <div>
-            <p class="popup-alert">Saving to unit...</p>
+            <p class="popup-alert">{{$t("Saving to unit...")}}</p>
             <div class="preloader-status flex" style="margin-top: 0">
               <div class="preloader preloader-gray" style="height: 25px; width: 25px;"></div>
             </div>
@@ -19,7 +19,7 @@
         <f7-card class="flex" style="width: 80%; text-align: center">
           <div>
             <img class="status-icon-inline" src="static/images/operation/status-ok.png" style="margin-top: 20px;">
-            <p class="popup-alert-saved e3i-success">Saved</p>
+            <p class="popup-alert-saved e3i-success">{{$t("Saved")}}</p>
           </div>
         </f7-card>
       </div>
@@ -29,7 +29,7 @@
       <div class="flex" style="height: 100vh">
         <f7-card class="flex" style="width: 80%; text-align: center">
           <div>
-            <p class="popup-alert">Resetting unit...</p>
+            <p class="popup-alert">{{$t("Resetting unit...")}}</p>
             <div class="preloader-status flex" style="margin-top: 0">
               <div class="preloader preloader-gray" style="height: 25px; width: 25px;"></div>
             </div>
@@ -43,7 +43,7 @@
         <f7-card class="flex" style="width: 80%; text-align: center">
           <div>
             <img class="status-icon-inline" src="static/images/operation/status-ok.png" style="margin-top: 20px;">
-            <p class="popup-alert-saved__reset e3i-success">Reset successful</p>
+            <p class="popup-alert-saved__reset e3i-success">{{$t("Reset successful")}}</p>
           </div>
         </f7-card>
       </div>
@@ -51,8 +51,8 @@
     <!-- <div :hidden="!connectToWifi" class="e3i-prompt-overlay" @click="closeWifiPrompt"></div> -->
     <f7-actions animated="true" :opened="connectToWifi">
       <f7-actions-group>
-        <f7-actions-label class="wifiConnect-title">Please connect to WiFi network</f7-actions-label>
-        <f7-actions-button style="width: 100%" @click="closeWifiPrompt()">ok</f7-actions-button>
+        <f7-actions-label class="wifiConnect-title">{{$t("Please connect to WiFi network")}}</f7-actions-label>
+        <f7-actions-button style="width: 100%" @click="closeWifiPrompt()">{{$t("ok")}}</f7-actions-button>
       </f7-actions-group>
     </f7-actions>
   </div>

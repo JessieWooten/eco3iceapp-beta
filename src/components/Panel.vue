@@ -8,7 +8,7 @@
       <f7-list>
         <!--Connect Prompt -->
         <f7-list-item
-          title="Connect to machine"
+          :title="$t('Connect to machine')"
           class="menu-item"
           @click="openConnectPrompt"
         >
@@ -17,7 +17,7 @@
         <!--Reset Prompt Disabled -->
         <f7-list-item
           v-if="unitNotSelected"
-          title="Reset Unit"
+          :title="$t('Reset Unit')"
           class="menu-item disabled"
         >
           <i class="f7-icons menu-icon-reset disabled">refresh</i>
@@ -25,7 +25,7 @@
         <!--Reset Prompt Enabled -->
         <f7-list-item
           v-else
-          title="Reset Unit"
+          :title="$t('Reset Unit')"
           class="menu-item"
           @click="openResetPrompt"
         >
@@ -38,7 +38,7 @@
             <li v-if="unitNotSelected" class="accordion-item">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title disabled" style="width:100%;">
-                  Rename Eco Unit
+                  {{$t("Rename Eco Unit")}}
                   <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
                 </div>
               </div>
@@ -46,7 +46,7 @@
             <li v-else id="rename"class="accordion-item" @setNewName="close(event)"><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
-                  Rename Eco Unit
+                  {{$t("Rename Eco Unit")}}
                   <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
                 </div>
               </div></a>
@@ -72,7 +72,7 @@
             <li v-if="unitNotSelected" class="accordion-item">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title disabled" style="width:100%;">
-                  Set Ice Machine Capacity
+                  {{$t("Set Ice Machine Capacity")}}
                   <i class="f7-icons menu-icon" style="font-size:19px; float: right;">box</i>
                 </div>
               </div>
@@ -80,7 +80,7 @@
             <li v-else id="capacity" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;" >
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
-                  Set Ice Machine Capacity
+                  {{$t("Set Ice Machine Capacity")}}
                   <i class="f7-icons menu-icon" style="font-size:19px; float: right;">box</i>
                 </div>
               </div></a>
@@ -92,8 +92,8 @@
                         v-model="capacityValue" v-on:keydown.enter="setCapacity()" placeholder="0"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"
                         />
-                        <span v-if="this.imperial" style="margin: 0 5px;"> lbs</span>
-                        <span v-else style="margin: 0 5px;"> kg</span>
+                        <span v-if="this.imperial" style="margin: 0 5px;"> {{$t("lbs")}}</span>
+                        <span v-else style="margin: 0 5px;"> {{$t("kg")}}</span>
                     </div>
                     <button :disabled="!isWholeNumber || Number(this.capacityValue) === 0  || unitNotSelected"
                       :class="{'menu-rename-button':true, 'disabled':!isWholeNumber }"
@@ -110,7 +110,7 @@
             <li id="language" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
-                  Language
+                  {{$t("Language")}}
                   <i class="f7-icons menu-icon" style="font-size:17px; float: right;">world</i>
                 </div>
               </div></a>
@@ -118,14 +118,7 @@
                 <div class="content-block" style="padding: 0">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div class="flex" style="width: 100%;">
-                    <select v-model="selectedLang"  class="menu-lang-select">
-                      <option disabled value="">{{currentLanguage}}</option>
-                      <option v-for="lang in allLanguages" :value="lang">{{lang}}</option>
-                    </select>
-                    <i class="f7-icons menu-icon" :disabled="this.selectedLang === ''"
-                    style="font-size:17px; padding: 10px 15px; margin-left: 20px;"
-                    @click="setLang"
-                    >chevron_right</i>
+                    <LangSelect @closePanel="closePanel"></LangSelect>
                   </div>
                   </div>
                 </div>
@@ -135,19 +128,19 @@
             <li id="measurements" class="accordion-item"><a href="#" class="item-link" style="padding-left:0;">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="overflow: visible;">
-                  Measurements
+                  {{$t("Measurements")}}
                   <img src="static/images/ruler.png" class="menu-icon-img">
                 </div>
               </div></a>
               <div class="accordion-item-content">
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
-                    <p :class="{'menu-measurement': true, disabled: !this.imperial}">imperial</p>
+                    <p :class="{'menu-measurement': true, disabled: !this.imperial}">{{$t("imperial")}}</p>
                     <f7-input id="switch"
                     type="switch"
                     @click="switchMeasurement"
                     style="width:auto"></f7-input>
-                    <p :class="{'menu-measurement': true, disabled: this.imperial}">metric</p>
+                    <p :class="{'menu-measurement': true, disabled: this.imperial}">{{$t("metric")}}</p>
                   </div>
                 </div>
               </div>
@@ -156,23 +149,27 @@
         </f7-list-item>
         <!--Log Prompt Enabled -->
         <f7-list-item
-          title="View Log"
+          :title="$t('View Log')"
           class="menu-item"
           @click="openLog"
         >
           <i class="f7-icons menu-icon" style="font-size:17px;">document_text</i>
         </f7-list-item>
       </f7-list>
-      <p :hidden="!nameTooShort" class="e3i-fail" style="font-size: 9px; margin-left: 15px">name should be at least 3 characters long</p>
-      <p :hidden="isWholeNumber" class="e3i-fail" style="font-size: 9px; margin-left: 15px">capacity should be a whole number</p>
-      <p :hidden="!hasForbiddenChars" class="e3i-fail" style="font-size: 9px; margin-left: 15px">name contains forbidden characters</p>
+      <p :hidden="!nameTooShort" class="e3i-fail" style="font-size: 9px; margin-left: 15px">{{$t("name should be at least 3 characters long")}}</p>
+      <p :hidden="isWholeNumber" class="e3i-fail" style="font-size: 9px; margin-left: 15px">{{$t("capacity should be a whole number")}}</p>
+      <p :hidden="!hasForbiddenChars" class="e3i-fail" style="font-size: 9px; margin-left: 15px">{{$t("name contains forbidden characters")}}</p>
     </f7-panel>
   </div>
 </template>
 
 <script>
 import { promptBus } from '../main'
+import LangSelect from './menu/LangSelect.vue'
 export default {
+  components: {
+    LangSelect
+  },
   props: {
     isPanelOpened: Boolean,
     isResetOpened: Boolean,
@@ -212,22 +209,6 @@ export default {
       }else{
         return (typeof input == 'number' && input%1 == 0);
       }
-    },
-    currentLanguage: function() {
-      switch (this.language) {
-        case 'en':
-          return "English"
-          break;
-
-        case "es":
-            return "Español"
-            break;
-
-        default:
-        return "Language"
-
-
-      }
     }
   },
   methods: {
@@ -260,10 +241,6 @@ export default {
       this.$emit('setNewName', this.newUnitName);
       this.clearInputs();
     },
-    setLang: function() {
-      this.$emit('setLang', this.selectedLang);
-      this.closePanel;
-    },
     clearInputs: function()  {
       this.newUnitName = this.unitName;
       this.capacityValue = '';
@@ -285,9 +262,7 @@ export default {
     return {
       capacityValue: '',
       newUnitName: this.unitName,
-      warnName: false,
-      selectedLang: '',
-      allLanguages: ["English", "Espanol", "French"]
+      warnName: false
     }
   }
 }

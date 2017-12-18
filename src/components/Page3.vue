@@ -13,7 +13,7 @@
           </div>
           <div class="purchase-wrapper__text">
             <div class="avg-consumption-display__top flex">
-              <p class="purchase-text">Order Parts <i class="f7-icons purchase-arrow">arrow_right</i>
+              <p class="purchase-text">{{$t("Order Parts")}} <i class="f7-icons purchase-arrow">arrow_right</i>
               </p>
             </div>
           </div>

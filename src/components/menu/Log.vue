@@ -7,7 +7,7 @@
             <i
               class="f7-icons menu-icon" style="font-size: 20px; color:#c7c8cc; margin-left: -10%;"
               @click="backToLogs" v-if="logIsDisplayed">chevron_left</i>
-            <span v-if="!logIsDisplayed" class="log-title">Logs</span>
+            <span v-if="!logIsDisplayed" class="log-title">{{$t("Logs")}}</span>
             <span v-else-if="logIsDisplayed && !isLocalLog" @click="backToLogs" class="log-title">{{unitName}}</span>
             <span v-else-if="logIsDisplayed && isLocalLog" @click="backToLogs" class="log-title">{{selectedLog[1]}}</span>
           </div>
@@ -41,14 +41,14 @@
         <f7-list v-if="!logIsDisplayed">
           <!--  Request Log Start  -->
           <f7-list-item v-if="selectedUnitIndex != -1"
-            title="Request Current Log"
+            :title="$t('Request Current Log')"
             class="menu-item"
             @click="requestLog"
           >
             <i class="f7-icons menu-icon" style="font-size: 20px; color:#c7c8cc;">arrow_right</i>
           </f7-list-item>
           <f7-list-item v-else
-            title="Request Current Log"
+            :title="$t('Request Current Log')"
             class="menu-item disabled"
           >
             <i class="f7-icons menu-icon" style="font-size: 20px; color:#c7c8cc;">arrow_right</i>
@@ -59,14 +59,14 @@
                 <li id="savedLogs" class="accordion-item">
                   <a href="#" class="item-content item-link">
                     <div class="item-inner" >
-                      <div class="menu-item item-title" style="width:100%;">Saved Logs</div>
+                      <div class="menu-item item-title" style="width:100%;">{{$t("Saved Logs")}}</div>
                     </div>
                   </a>
                 <!-- If no logs saved -->
                   <div class="accordion-item-content menu-drop-down local-logs-list-wrapper">
                     <div v-if="localLogs.length === 0" class="content-block">
                       <div class="flex" style="justify-content: flex-start;">
-                        <p>No saved logs</p>
+                        <p>{{$t("No saved logs")}}</p>
                       </div>
                     </div>
                     <!-- Log displays -->
@@ -123,7 +123,8 @@
         <f7-actions-button @click="closeLog"
           class="e3i-gray-light log-button"
         >
-          <i class="f7-icons" style="font-size:17px; color: #b6b2b2; padding-right: 5px;">close</i>close
+          <i class="f7-icons" style="font-size:17px; color: #b6b2b2; padding-right: 5px;">close</i>
+          {{$t("close")}}
         </f7-actions-button>
       </f7-actions-group>
     </f7-actions>
