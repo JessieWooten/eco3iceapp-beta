@@ -133,6 +133,7 @@
   color: #5a5a5a;
   font-size: 12px;
   padding-right: 15px;
+  padding-left: 5px;
 }
 
 .menu-logo {
@@ -148,8 +149,9 @@
 
 .menu-icon-img {
   height: 8px;
-  position: relative;
-  left: 96px;
+  padding-right: 11px;
+  /*position: relative;
+  left: 96px;*/
 }
 
 .menu-logo-container {
@@ -210,6 +212,13 @@
   font-weight: 300 !important;
   padding-left: 10px !important;
   display: inline-block !important;
+}
+
+.menu-submit-button {
+
+  font-size:17px;
+  padding: 10px 15px;
+  margin-left: 20px;
 }
 
 .popup-alert {

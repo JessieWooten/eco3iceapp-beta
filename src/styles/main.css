@@ -40,6 +40,10 @@ text-align: center;
   margin: 0;
 }
 
+.list-block .item-title {
+  white-space: normal;
+}
+
 .inset {
   margin-top:15px !important;
   margin-bottom: 15px !important;
