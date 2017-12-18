@@ -4,8 +4,7 @@
       <option disabled value="" style="display: none;">{{currentLanguage(locale)}}</option>
       <option v-for="(lang, index) in supportedLangs" :value="lang">{{currentLanguage(lang)}}</option>
     </select>
-    <i class="f7-icons menu-icon" :disabled="isDisabled"
-    style="font-size:17px; padding: 10px 15px; margin-left: 20px;"
+    <i class="f7-icons menu-icon menu-submit-button" :disabled="isDisabled"
     @click="setLang"
     >chevron_right</i>
   </div>
@@ -61,10 +60,6 @@ export default {
         case "es":
             return "español"
             break;
-
-        case "ja":
-          return "日本語"
-          break;
 
         default:
         return lang
