@@ -59,10 +59,11 @@
                         v-model="newUnitName" v-on:keydown.enter="setName()"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"/>
                     </div>
-                    <button :disabled="nameTooShort || nameIsSame || unitNotSelected || hasForbiddenChars" class="menu-rename-button"
+                    <button :disabled="nameTooShort || nameIsSame || unitNotSelected || hasForbiddenChars"
+                      :class="{'menu-rename-button': true, 'menu-disabled-button': nameTooShort || nameIsSame || unitNotSelected || hasForbiddenChars }"
                       type="button" name="button" @click="setName()"
                       >
-                      <i class="f7-icons" style="padding: 0 3px;">add</i>
+                      <i class="f7-icons" style="font-size: 17px;">chevron_right</i>
                     </button>
                   </div>
                 </div>
@@ -96,11 +97,11 @@
                         <span v-else style="margin: 0 5px;"> {{$t("kg")}}</span>
                     </div>
                     <button :disabled="!isWholeNumber || Number(this.capacityValue) === 0  || unitNotSelected"
-                      :class="{'menu-rename-button':true, 'disabled':!isWholeNumber }"
+                      :class="{'menu-rename-button':true, 'menu-disabled-button':!isWholeNumber || Number(this.capacityValue) === 0  || unitNotSelected }"
                       type="button" name="button"
                       @click="setCapacity()"
                     >
-                      <i class="f7-icons" style="padding: 0 3px;">add</i>
+                      <i class="f7-icons" style="font-size: 17px;">chevron_right</i>
                     </button>
                   </div>
                 </div>
@@ -136,12 +137,14 @@
               <div class="accordion-item-content">
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
-                    <p :class="{'menu-measurement': true, disabled: !this.imperial}">{{$t("imperial")}}</p>
+                    <p :class="{'menu-measurement': true, disabled: this.imperial}">{{$t("metric")}}</p>
                     <f7-input id="switch"
+                    v-model="this.imperial"
                     type="switch"
                     @click="switchMeasurement"
+                    name="measurement"
                     style="width:auto"></f7-input>
-                    <p :class="{'menu-measurement': true, disabled: this.imperial}">{{$t("metric")}}</p>
+                    <p :class="{'menu-measurement': true, disabled: !this.imperial}">{{$t("imperial")}}</p>
                   </div>
                 </div>
               </div>
