@@ -180,8 +180,18 @@
   border: none;
   border-radius: 5px;
   color: #fff;
-  margin-left: 5px;
+  margin-left: 8px;
+  padding: 8px 15px;
+  transition: .2s;
+}
 
+.menu-disabled-button {
+  background-color: #f2f2f2;
+  border: 1px solid #c7c8cc;
+  border-radius: 5px;
+  color: #c7c8cc;
+  margin-left: 8px;
+  padding: 5px 15px;
 }
 
 .menu-rename-input {
@@ -205,10 +215,10 @@
 
 .menu-lang-select {
   height: 30px !important;
-  width: 60% !important;
+  width: 70% !important;
   border: 1px solid lightgray !important;
   border-radius: 5px !important;
-  margin: 10px !important;
+  margin: 10px 0 10px 10px !important;
   font-weight: 300 !important;
   padding-left: 10px !important;
   display: inline-block !important;
