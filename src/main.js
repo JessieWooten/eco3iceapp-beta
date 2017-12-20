@@ -34,8 +34,9 @@ window.vue = new Vue({
   },
   i18n,
   mounted: function(){
+    window.app.reqUserData();
     window.app.inApp();
     this.$children[0].toggleConnect();
-    window.app.scanBle();
+    setTimeout(function(){window.app.scanBle()}, 100);
   }
 });
