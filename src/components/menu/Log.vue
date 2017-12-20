@@ -1,5 +1,6 @@
 <template lang="html">
   <div @actions:closed="closeLog()">
+    <div :hidden="!isLogOpened" class="e3i-prompt-overlay" @click="closeLog" style="background: rgba(0,0,0,.3);"></div>
     <f7-actions animated="true" :opened="isLogOpened" style="margin-left: 0; left: 0; width: 100%">
       <f7-actions-group class="log-wrapper">
         <f7-actions-label>
@@ -73,7 +74,7 @@
                     <ul v-else>
                       <div v-for="(dir, dindex) in localLogs" class="local-log-list">
                         <li class="accordion-item"><a href="#" class="item-content item-link" style="background-color: #fcfcfc;">
-                          <div class="item-inner">
+                          <div class="item-inner" @click="deleteDirectory(dir[0], dir[1])">
                             <div class="item-title menu-item">{{ dir[0] }}</div>
                           </div></a>
                           <div class="accordion-item-content" v-for="(file, findex) in dir[1]">
@@ -160,6 +161,7 @@ export default {
   },
   methods: {
     closeLog: function(){
+      this.logIsDisplayed = false
       this.$emit('logClosed');
       window.vue.$f7.accordionClose('#savedLogs')
     },
