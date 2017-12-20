@@ -324,9 +324,12 @@ export default {
     },
     toggleMeasurements: function() {
       this.imperial = !this.imperial;
+      window.app.userData('imperial', this.imperial);
     },
     logSavingToggle: function() {
       this.logCurrentlySaving = true;
+      var self = this;
+      setTimeout(function(){ self.logCurrentlySaving = false;}, 5000)
     },
     cleanUpInput: function(input) {
       return input.toLowerCase().trim();
