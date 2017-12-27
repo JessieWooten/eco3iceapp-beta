@@ -71,6 +71,8 @@ var text = {
       "Reset successful": "Reset successful",
       "Please connect to WiFi network": "Please connect to WiFi network",
       "ok": "ok",
+      "Your IP has changed": "Your IP has changed",
+      "Please be sure you are connected to the correct WiFi network and reconnect to your Eco3Ice unit":"Please be sure you are connected to the correct WiFi network and reconnect to your Eco3Ice unit",
   //Reset.vue
       "Are you sure you want to reset": "Are you sure you want to reset",
       "Reset": "Reset"
