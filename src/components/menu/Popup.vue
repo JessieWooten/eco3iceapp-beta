@@ -82,12 +82,9 @@ export default {
     },
     closeIpPrompt: function() {
       this.$emit('closeIpPrompt')
-<<<<<<< HEAD
     },
     closePopups: function() {
       this.$emit('closePopups')
-=======
->>>>>>> tablet_sizing2
     }
   }
 }
