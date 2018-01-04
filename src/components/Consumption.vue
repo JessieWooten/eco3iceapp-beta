@@ -66,7 +66,7 @@
                 <!--LBS-->
                 <div v-if="this.imperial">
                   <span class="avg-consumption-number e3i-success">{{ averageConsumption }}</span>
-                  <img class="avg-consumption-icon" src="static/images/consumption/lbs.png">
+                    <img class="avg-consumption-icon" src="static/images/consumption/lbs.png">
                   <p class="avg-consumption-display__daily">{{$t("daily")}}</p>
                 </div>
                 <!--KG-->
