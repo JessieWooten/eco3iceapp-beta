@@ -72,10 +72,7 @@
           :ipChanged="ipChanged"
           @closeWifiPrompt="toggleWifiPrompt"
           @closeIpPrompt="toggleIpPrompt"
-<<<<<<< HEAD
           @closePopups="closePopups"
-=======
->>>>>>> tablet_sizing2
         ></popup>
         <!--Page start -->
         <f7-pages id="pages">
