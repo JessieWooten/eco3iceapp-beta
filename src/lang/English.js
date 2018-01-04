@@ -4,7 +4,7 @@ var text = {
   //Panel.vue (menu items)
       "Connect to machine": "Connect to machine",
       "Reset Unit": "Reset Unit",
-      "Rename Eco Unit": "Rename Eco Unit",
+      "Rename Unit": "Rename Unit",
       "Set Ice Machine Capacity": "Set Ice Machine Capacity",
       "lbs": "lbs",
       "kg": "kg",
