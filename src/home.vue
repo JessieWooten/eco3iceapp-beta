@@ -72,7 +72,10 @@
           :ipChanged="ipChanged"
           @closeWifiPrompt="toggleWifiPrompt"
           @closeIpPrompt="toggleIpPrompt"
+<<<<<<< HEAD
           @closePopups="closePopups"
+=======
+>>>>>>> tablet_sizing2
         ></popup>
         <!--Page start -->
         <f7-pages id="pages">
@@ -84,7 +87,7 @@
               <div class="preloader preloader-white"></div>
               <div class="pull-to-refresh-arrow"><i class="f7-icons color-white">arrow_down</i></div>
             </div>
-            <div class="unit-name-container">
+            <div :class="{'unit-name-container': true, 'bottom-space__title': this.version === ''}">
               <div v-if='nameIsLoading' class="flex" style="margin-top: 22px;">
                 <div class="preloader preloader-white"></div>
               </div>
@@ -103,7 +106,7 @@
                   @toggleDisconnectPrompt="toggleDisconnectPrompt()"
                 ></operation>
               </f7-swiper-slide>
-              <f7-swiper-slide>
+              <!-- <f7-swiper-slide>
                 <consumption
                   :consumption="consumption"
                   :averageDuty="averageDuty"
@@ -112,7 +115,7 @@
                   :selectedUnitIndex="selectedUnitIndex"
                   @toggleDisconnectPrompt="toggleDisconnectPrompt()"
                 ></consumption>
-              </f7-swiper-slide>
+              </f7-swiper-slide> -->
               <f7-swiper-slide>
                 <page-3
                   @OpenOrderParts="toggleOrderPrompt()"
@@ -235,7 +238,7 @@ export default {
 
     }else if(str.indexOf('local_logs') != -1){
       var arr= JSON.parse(str.substring(11));
-      //loops through array and if directory is empty, deletes that directory
+      //loops through array and if directory is empty, deletes that empty directory
       arr.map(function(dir) {
         if(dir[1].length === 0){
           window.app.deleteFile(encodeURIComponent(dir[0]))
@@ -358,6 +361,12 @@ export default {
         window.app.sendCommand('rename:' + encodeURIComponent(name));
         this.nameIsLoading = true;
         this.popupOpened = true;
+        var self = this;
+        setTimeout(function(){
+          if(self.popupOpened){
+            self.popupOpened = false;
+          }
+        }, 10000)
       }
     },
     setCapacity: function(capacity){
@@ -365,6 +374,12 @@ export default {
         window.app.sendCommand('capacity:' + capacity)
         console.log("window.app.sendCommand('capacity:' + capacity)")
         this.popupOpened = true;
+        var self = this;
+        setTimeout(function(){
+          if(self.popupOpened){
+            self.popupOpened = false;
+          }
+        }, 10000)
       }
     },
     setLang: function(lang) {

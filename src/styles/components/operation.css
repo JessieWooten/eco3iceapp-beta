@@ -14,12 +14,12 @@ padding-top: 16px;
 }
 
 .status-icon-inline {
-  height: 40px;
+  height: 10.5vw;
   display: inline-block;
 }
 
 .status-icon {
-  height: 40px;
+  height: 10.6vw;
   display: block;
   margin: auto;
   padding-top: 12px;
@@ -27,20 +27,20 @@ padding-top: 16px;
 
 .status-text {
   text-align: center;
-  font-size: 1.8em;
+  font-size: 6vw;
   margin: 0;
   padding: 0 10px;
 }
 
 .status-text-blank {
   display: inline-block;
-  font-size: 4em;
+  font-size: 15vw;
   margin: 0;
 }
 
 .status-text-ok {
   display: inline-block;
-  font-size: 5em;
+  font-size: 17vw;
   padding-right: 20px;
   margin: 0;
 }
@@ -62,20 +62,20 @@ padding-top: 16px;
 }
 
 .health-icon {
-  width: 30px;
+  width: 8vw;
   display: inline-block;
   padding-right: 5px;
 }
 
 .health-text {
   display: inline-block;
-  font-size: 1.8em;
+  font-size: 6.7vw;
   padding-top:20px;
   margin: 0;
 }
 
 .water-icon {
-  height: 20px;
+  height: 3vh;
   display: inline-block;
   padding-right: 5px;
 }
@@ -103,16 +103,17 @@ padding-top: 16px;
 }
 
 .disconnect-launcher {
-  width: 35px;
-  height: 35px;
+  /*width: 35px;
+  height: 35px;*/
 }
 
 .disconnect-icon {
   text-align: center !important;
   display: block !important;
   opacity: .3 !important;
-  font-size: 28px;
   color: #ffffff !important;
+  font-size: 2em;
+  padding: 1vh 3vw;
 }
 
 
@@ -121,8 +122,22 @@ padding-top: 16px;
 /*|||| CONSUMPTION STYLING ||||*/
 .consumption-text {
   display: inline-block;
-  font-size: 4em;
+  font-size: 15vw;
   margin: 0;
+}
+
+.weight-image-wrapper{
+  display: inline;
+  position:relative;
+}
+
+.weight-text{
+  left: 0;
+  position:absolute;
+  text-align:center;
+  top: -8px;
+  width: 100%;
+  font-size: 3vw;
 }
 
 .avg-consumption-wrapper__title {
@@ -158,7 +173,7 @@ width: 100%;
 .avg-consumption-number {
   text-align: right;
   display: inline-block;
-  font-size: 2.7em;
+  font-size: 10vw;
 }
 
 .avg-consumption-display__daily {
@@ -167,12 +182,12 @@ width: 100%;
   text-align: right;
   position: relative;
   bottom: 11px;
-  font-size: 1.3em;
+  font-size: 5vw;
   font-weight: 300;
 }
 
 .avg-consumption-icon {
-  height: 30px;
+  height: 8vw;
   display: inline-block;
   margin: auto;
 }
@@ -203,7 +218,7 @@ width: 100%;
 
 .purchase-text {
   color: #5a5a5a;
-  font-size: 1.5em;
+  font-size: 5.5vw;
 }
 
 .purchase-arrow {
@@ -249,10 +264,6 @@ width: 100%;
     padding-top: 10px;
   }
 
-  .box-title {
-    padding-bottom: 10px;
-  }
-
   .health-icon {
     width: 22px;
   }
@@ -275,74 +286,9 @@ width: 100%;
   }
 
 }
-
-@media (min-height: 800px) {
-  .avg-consumption__title {
-    padding-left: 30%;
-  }
-  .purchase-text {
-    font-size: 2.3em;
-  }
-
-  .purchase-arrow {
-    font-size: 23px;
-  }
-}
-
-@media (min-height: 1000px) {
-  .purchase-text {
-    font-size: 2.8em;
-  }
-
-  .purchase-arrow {
-    font-size: 35px;
-  }
-
-  .shopping-cart {
-    width: 30%;
-  }
-
-  .consumption-text {
-    font-size: 6em;
-  }
-
-  .status-icon-inline {
-    height: 55px;
-  }
-
-  .health-text {
-    font-size: 2.5em;
-  }
-
-  .health-icon {
-    width: 45px;
-  }
-
-  .status-text {
-      font-size: 2.8em;
-  }
-
-  .status-icon {
-    height: 65px;
-  }
-
-  .avg-consumption-number {
-    font-size: 3.7em;
-  }
-
-  .avg-consumption__title {
-    font-size: 1.3em;
-  }
-
-  .avg-consumption-icon {
-    height: 40px;
-  }
-
-  .status-text-ok {
-    font-size: 6em;
-  }
-
-  .box-title {
-    font-size: 1.7em;
-  }
-}
+ @media (aspect-ratio: 3/4) {
+   
+   .avg-consumption__title {
+     font-size: 4vw;
+   }
+ }

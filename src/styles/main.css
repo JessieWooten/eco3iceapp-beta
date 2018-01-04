@@ -125,3 +125,10 @@ li div.item-content .item-inner {
     height: 20%;
   }
 }
+
+@media (min-width: 700px) {
+  .content-block.inset {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+}

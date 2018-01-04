@@ -55,6 +55,12 @@
   /*overflow: scroll;*/
 }
 
+/* NO WIFI Nav Styling*/
+.no-wifi {
+  background-color: #e0e0e0 !important;
+  color: #fff !important;
+}
+
 /*Title and Text Styling*/
 .unit-name-container {
   padding: 0 30px;
@@ -65,8 +71,12 @@
   color: white !important;
   text-align: center;
   font-weight: 400;
-  font-size: 25px;
+  font-size: 6.7vw;
   margin-bottom: 0;
+}
+
+.bottom-space__title {
+  margin-bottom: 10px;
 }
 
 .unit-version {
@@ -76,6 +86,7 @@
   font-size: 12px;
   display: block;
   opacity: .5;
+  margin-bottom: 5px;
 }
 
 .nav-title {
@@ -86,10 +97,11 @@
 
 .page-title {
   font-weight: 300;
+  font-size: 4.4vw;
   color: #fff !important;
   text-align: center;
   letter-spacing: 1px;
-  margin-top: 10px;
+  margin-top: 0;
   margin-bottom: 0;
 }
 
@@ -98,16 +110,16 @@
   text-align: center;
   margin: 0 auto;
   display: block;
-  font-size: 1.3em;
+  font-size: 5vw;
   letter-spacing: 0.5px;
-  padding-bottom: 20px;
+  padding-bottom: 4vh;
 }
 .box-title-left {
   color: #b6b2b2;
   text-align: left;
   margin: 0 auto;
   display: block;
-  font-size: 1.3em;
+  font-size: 5vw;
   letter-spacing: 0.5px;
   margin: 10px 0;
   border-right: 1px solid #b6b2b2;
@@ -300,12 +312,12 @@
 }
 
 .log-data {
-  width: 100%
+  width: 100%;
   font-family: monospace;
   display: flex;
   padding: 0 5px;
   color: #5a5a5a !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
 }
 
 .log-title-wrapper{
@@ -425,32 +437,25 @@ color: #dc281e;
 }
 
 @media (max-height: 645px) {
-  .box-title {
+  /*.box-title {
     font-size: 1em;
+    padding-bottom: 10px;
   }
 
   .box-title-left {
     font-size: 1em;
-  }
+  }*/
   .log-data-display{
     height: 77.5%;
   }
 
-  .local-log-list-wrapper {
+  /*.local-log-list-wrapper {
     max-height: 57vh;
-  }
+  }*/
 }
 
 @media (min-height: 800px) {
-  .e3i-scale-lg {
-    height: 33%;
-    background-color: #fff;
-  }
 
-  .e3i-scale-sm {
-    height: 17%;
-    background-color: #fff;
-  }
   .log-data-display{
     height: 84%;
   }
@@ -468,36 +473,39 @@ color: #dc281e;
 }
 
 @media (min-height: 1000px) {
+  .log-data-display{
+    height: 87%;
+  }
   .unit-name{
-    font-size: 2.5em;
-  }
-  .unit-version {
-    font-size: 1.3em;
-  }
-  .popup-alert {
-    font-size: 2em;
+    font-size: 6vw;
   }
 
-  .popup-alert-saved {
-    font-size: 2.7em
-  }
-
-  .popup-alert-saved__reset {
-    font-size: 2.5em;
-  }
-
-  .log-key{
-    padding-left: 60px;
+  .box-title {
+    font-size: 4vw;
   }
 
   .log-data{
     padding-right: 60px;
   }
-  .log-data-display{
-    height: 87%;
-  }
 
   .local-log-list-wrapper {
     max-height: 74vh;
+  }
+}
+
+@media (min-height: 1200px) {
+  .log-data-display{
+    height: 89.5%;
+  }
+}
+
+@media screen and (aspect-ratio: 4/3) {
+  .unit-name{
+    color: red !important;
+    font-size: 6vw;
+  }
+
+  .box-title {
+    font-size: 4vw;
   }
 }

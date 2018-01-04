@@ -75,7 +75,10 @@
                       <div v-for="(dir, dindex) in localLogs" class="local-log-list">
                         <li class="accordion-item"><a href="#" class="item-content item-link" style="background-color: #fcfcfc;">
                           <div class="item-inner">
-                            <div class="item-title menu-item">{{ dir[0] }}</div>
+                            <div class="item-title menu-item">
+                              <i class="f7-icons" style="font-size:15px; padding-right: 5px;">folder</i>
+                              {{ dir[0] }}
+                            </div>
                           </div></a>
                           <div class="accordion-item-content" v-for="(file, findex) in dir[1]">
                             <li :id="'file' + dindex + findex" class="swipeout">

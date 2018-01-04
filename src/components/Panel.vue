@@ -38,7 +38,7 @@
             <li v-if="unitNotSelected" class="accordion-item">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title disabled" style="width:100%;">
-                  {{$t("Rename Eco Unit")}}
+                  {{$t("Rename Unit")}}
                 </div>
                 <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
               </div>
@@ -46,7 +46,7 @@
             <li v-else id="rename"class="accordion-item" @setNewName="close(event)"><a href="#" class="item-link" style="padding-left:0;" @click="matchNames('rename')">
               <div class="item-inner" style="padding-right:0; background: none;">
                 <div class="menu-item item-title" style="width:100%;">
-                  {{$t("Rename Eco Unit")}}
+                  {{$t("Rename Unit")}}
                 </div>
                 <i class="f7-icons menu-icon" style="font-size:18px; float: right;">compose</i>
               </div></a>
