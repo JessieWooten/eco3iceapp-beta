@@ -55,6 +55,14 @@
         <f7-actions-button style="width: 100%" @click="closeWifiPrompt()">{{$t("ok")}}</f7-actions-button>
       </f7-actions-group>
     </f7-actions>
+
+    <f7-actions animated="true" :opened="ipChanged">
+      <f7-actions-group>
+        <f7-actions-label class="wifiConnect-title">Your IP has changed</f7-actions-label>
+        <f7-actions-label class="menu-item ">Please be sure you are connected to the correct WiFi network and reconnect to your Eco3Ice unit.</f7-actions-label>
+        <f7-actions-button style="width: 100%" @click="closeIpPrompt()">{{$t("ok")}}</f7-actions-button>
+      </f7-actions-group>
+    </f7-actions>
   </div>
 </template>
 
@@ -65,11 +73,15 @@ export default {
     popupSaveOpened: Boolean,
     popupWasReset: Boolean,
     popupResetOpened: Boolean,
-    connectToWifi: Boolean
+    connectToWifi: Boolean,
+    ipChanged: Boolean
   },
   methods: {
     closeWifiPrompt: function() {
       this.$emit('closeWifiPrompt')
+    },
+    closeIpPrompt: function() {
+      this.$emit('closeIpPrompt')
     }
   }
 }
