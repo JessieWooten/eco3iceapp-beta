@@ -3,6 +3,7 @@ var text = {
       "Eco3Ice Metrics": 'Metricas de Eco<span style="font-size:11px !important;">3</span>',
   //Panel.vue (menu items)
       "Connect to machine": "Connectando al equipo",
+      "Disconnect Unit": "Disconeta Unidad",
       "Reset Unit": "Reniciar Unidad",
       "Rename Unit": "Renombrar Unidad",
       "Set Ice Machine Capacity": "Ajustar Capacidad de maquina de hielo",

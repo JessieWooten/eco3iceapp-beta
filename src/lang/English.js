@@ -3,6 +3,7 @@ var text = {
       "Eco3Ice Metrics": 'Eco<span style="font-size:11px !important;">3</span> Metrics',
   //Panel.vue (menu items)
       "Connect to machine": "Connect to machine",
+      "Disconnect Unit": "Disconnect Unit",
       "Reset Unit": "Reset Unit",
       "Rename Unit": "Rename Unit",
       "Set Ice Machine Capacity": "Set Ice Machine Capacity",

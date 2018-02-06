@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     orderParts: function() {
-      this.$emit('OpenOrderParts')
+        window.app.orderParts('www.myfranke.com')
     }
   },
   data: function() {

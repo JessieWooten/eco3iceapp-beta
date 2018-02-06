@@ -17,7 +17,7 @@
           @setCapacity="setCapacity($event)"
           @setLang="setLang($event)"
           @openLog="toggleLog()"
-
+          @openDisconnectPrompt="toggleDisconnectPrompt()"
         ></panel>
         <!-- Reset Prompt -->
         <reset-prompt
@@ -56,12 +56,6 @@
           @logCurrentlySaving="logSavingToggle"
         >
         </log>
-        <!-- Order parts prompt -->
-        <OrderParts
-        :orderPartsOpened="orderPartsOpened"
-        @orderPromptClosed="toggleOrderPrompt"
-
-        ></OrderParts>
         <!--Popup prompts -->
         <popup
           :popupOpened="popupOpened"
@@ -162,9 +156,9 @@ export default {
 		if(str == "connected") {
 			setTimeout(function() { window.app.sendCommand("dr");},500);
 
-		}else if(str.indexOf('data_ready') > -1) {
+		}else if(str.indexOf('do:') > -1) {
 			try {
-				var sdata = JSON.parse(str.substring(11));
+				var sdata = JSON.parse(str.substring(3));
 				this.status = sdata.status;
 				this.health = sdata.health;
 				this.waterUsage = sdata.volume;
@@ -187,7 +181,7 @@ export default {
     }else if(str.indexOf('name_saved') > -1){
       var xhttp = new XMLHttpRequest();
       var self = this;
-      var request = "http://" + this.mac + ':8081/info'
+      var request = "http://" + this.mac + ':80/info'
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           var device = JSON.parse(this.responseText);
@@ -391,6 +385,7 @@ export default {
     },
     disconnectUnit: function() {
       if(window.app.isConnected() && this.selectedUnitIndex != -1){
+        this.panelOpened = false;
         this.unitName = '- - -';
         this.status = '---';
         this.mac = '';

@@ -127,7 +127,7 @@
         <f7-actions-button @click="closeLog"
           class="e3i-gray-light log-button"
         >
-          <i class="f7-icons" style="font-size:17px; color: #b6b2b2; padding-right: 5px;">close</i>
+          <i class="f7-icons" style="font-size:17px; color: #5a5a5a; padding-right: 5px;">close</i>
           {{$t("close")}}
         </f7-actions-button>
       </f7-actions-group>

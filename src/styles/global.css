@@ -328,9 +328,9 @@
 }
 
 .log-title {
+  color: #5a5a5a;
   font-size: 14px;
   padding: 10px 0;
-  font-weight: 300;
 }
 
 .log-data-display {
@@ -341,6 +341,7 @@
 }
 
 .log-button {
+  color: #5a5a5a !important;
   width: 100% !important;
   position: absolute !important;
   bottom: 0 !important;
@@ -354,12 +355,14 @@
 }
 
 .log-email-icon {
+  color: #5a5a5a;
   margin-top: 3px;
   font-size: 1.6em;
   padding: 10px 15px;
 }
 
 .log-download-icon {
+  color: #5a5a5a;
   font-size: 1.5em;
   padding: 10px 15px;
 }

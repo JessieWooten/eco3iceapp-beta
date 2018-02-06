@@ -3,7 +3,7 @@
     <div :hidden="!isPanelOpened" class="e3i-prompt-overlay" @click="closePanel"></div>
     <f7-panel left cover :opened='isPanelOpened'>
       <div class="menu-logo-container">
-        <img class="menu-logo" src="static/images/franke-logo.jpg" alt="Franke">
+        <img class="menu-logo" src="static/images/franke-logo.jpg" alt="Franke" @click="closePanel">
       </div>
       <f7-list>
         <!--Connect Prompt -->
@@ -13,6 +13,23 @@
           @click="openConnectPrompt"
         >
           <i class="f7-icons menu-icon">social_rss_fill</i>
+        </f7-list-item>
+        <!-- Disconnect Prompt Disabled-->
+        <f7-list-item
+          v-if="unitNotSelected"
+          :title="$t('Disconnect Unit')"
+          class="menu-item disabled"
+        >
+          <i class="f7-icons menu-icon disabled" style="font-size:23px;">close</i>
+        </f7-list-item>
+        <!--Disconnect Prompt Enabled -->
+        <f7-list-item
+          v-else
+          :title="$t('Disconnect Unit')"
+          class="menu-item"
+          @click="openDisconnectPrompt"
+        >
+          <i class="f7-icons menu-icon" style="font-size:23px;">close</i>
         </f7-list-item>
         <!--Reset Prompt Disabled -->
         <f7-list-item
@@ -221,6 +238,9 @@ export default {
     },
     openConnectPrompt: function() {
       this.$emit('openConnectPrompt');
+    },
+    openDisconnectPrompt: function() {
+      this.$emit('openDisconnectPrompt');
     },
     openResetPrompt: function() {
       this.$emit('openResetPrompt');
