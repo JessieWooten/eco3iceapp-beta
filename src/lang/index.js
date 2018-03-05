@@ -1,8 +1,7 @@
 import en from './English.js'
 import es from './Español.js'
 const messages = {
-  en: en,
-  es: es
+  en: en
 }
 
 export default messages;
