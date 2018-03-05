@@ -106,7 +106,7 @@
                 <div class="content-block">
                   <div class="menu-drop-down flex" style="justify-content: flex-start;">
                     <div>
-                      <input class="menu-capacity-input" type="text" maxlength="5"
+                      <input class="menu-capacity-input" type="tel" maxlength="5"
                         v-model="capacityValue" v-on:keydown.enter="setCapacity()" placeholder="0"
                         style="margin: 5px 0; padding: 0 8px; font-weight: 300"
                         />
@@ -169,13 +169,13 @@
           </div>
         </f7-list-item>
         <!--Log Prompt Enabled -->
-        <f7-list-item
+        <!-- <f7-list-item
           :title="$t('View Log')"
           class="menu-item"
           @click="openLog"
         >
           <i class="f7-icons menu-icon" style="font-size:17px;">document_text</i>
-        </f7-list-item>
+        </f7-list-item> -->
       </f7-list>
       <p :hidden="!nameTooShort" class="e3i-fail" style="font-size: 9px; margin-left: 15px">{{$t("name should be at least 3 characters long")}}</p>
       <p :hidden="isWholeNumber" class="e3i-fail" style="font-size: 9px; margin-left: 15px">{{$t("capacity should be a whole number")}}</p>
